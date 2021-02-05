@@ -19,6 +19,7 @@
 package com.github.ms5984.api.menuman;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -50,6 +51,35 @@ public class MenuClick {
      */
     public InventoryView getInventoryView() {
         return inventoryClickEvent.getView();
+    }
+
+    /**
+     * Get the index of the slot that was clicked.
+     * @return {@link InventoryClickEvent#getSlot()}
+     */
+    public int getSlotIndex() {
+        return inventoryClickEvent.getSlot();
+    }
+
+    /**
+     * Get the {@link ClickType} of this event.
+     * <p>Feel free to explore the enum, it looks powerful.</p>
+     * @return {@link InventoryClickEvent#getClick()}
+     */
+    public ClickType getClickType() {
+        return inventoryClickEvent.getClick();
+    }
+
+    // TODO: decide if actions on empty slots should be allowed
+    /**
+     * Try to get the item clicked.
+     * <p>As the API exists right now, this method is useless.
+     * If there is interest in adding actions on empty slots/etc.,
+     * I will look into at that point in time.</p>
+     * @return an Optional of the clicked ItemStack
+     */
+    public Optional<ItemStack> getItemClicked() {
+        return Optional.ofNullable(inventoryClickEvent.getCurrentItem());
     }
 
     /**
