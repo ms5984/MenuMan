@@ -37,6 +37,14 @@
         </resources>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>github-pkg</id>
+            <name>GitHub ms5984 Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/ms5984/MenuMan</url>
+        </repository>
+    </distributionManagement>
+
     <repositories>
         <repository>
             <id>spigotmc-repo</id>
