@@ -21,8 +21,10 @@ package com.github.ms5984.api.menuman;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -54,14 +56,6 @@ public class MenuClick {
     }
 
     /**
-     * Get the index of the slot that was clicked.
-     * @return {@link InventoryClickEvent#getSlot()}
-     */
-    public int getSlotIndex() {
-        return inventoryClickEvent.getSlot();
-    }
-
-    /**
      * Get the {@link ClickType} of this event.
      * <p>Feel free to explore the enum, it looks powerful.</p>
      * @return {@link InventoryClickEvent#getClick()}
@@ -70,16 +64,14 @@ public class MenuClick {
         return inventoryClickEvent.getClick();
     }
 
-    // TODO: decide if actions on empty slots should be allowed
     /**
-     * Try to get the item clicked.
-     * <p>As the API exists right now, this method is useless.
-     * If there is interest in adding actions on empty slots/etc.,
-     * I will look into at that point in time.</p>
-     * @return an Optional of the clicked ItemStack
+     * Get an Optional describing the slot clicked, if applicable.
+     * @return an Optional of the clicked InventorySlot
      */
-    public Optional<ItemStack> getItemClicked() {
-        return Optional.ofNullable(inventoryClickEvent.getCurrentItem());
+    public Optional<InventorySlot> getSlotClicked() {
+        final Inventory clickedInventory = inventoryClickEvent.getClickedInventory();
+        if (clickedInventory == null) return Optional.empty();
+        return Optional.of(new InventorySlot(clickedInventory, inventoryClickEvent.getSlot()));
     }
 
     /**
@@ -93,9 +85,60 @@ public class MenuClick {
     }
 
     /**
-     * Permanently uncancel the event and allow the click to follow through.
+     * Uncancel the event and allow the click to follow through.
      */
     public void allowClick() {
         inventoryClickEvent.setCancelled(false);
+    }
+
+    /**
+     * Cancel the click event, preventing pickup of the item.
+     */
+    public void disallowClick() {
+        inventoryClickEvent.setCancelled(true);
+    }
+
+    private static class InventorySlot {
+        protected final Inventory inventory;
+        protected final int slot;
+
+        private InventorySlot(Inventory inventory, int slot) {
+            this.inventory = inventory;
+            this.slot = slot;
+        }
+
+        /**
+         * Get the Inventory that was clicked.
+         * @return clicked inventory
+         */
+        public Inventory getClickedInventory() {
+            return inventory;
+        }
+
+        /**
+         * Get the index of the slot.
+         * @return {@link InventoryClickEvent#getSlot()}
+         * (value in context of clicked inventory)
+         */
+        public int getIndex() {
+            return slot;
+        }
+
+        /**
+         * Get the item in the slot.
+         * @return the current item or null
+         */
+        @Nullable
+        public ItemStack getItem() {
+            return inventory.getItem(slot);
+        }
+
+        /**
+         * Set a new item in the slot.
+         * @param itemStack a new item
+         */
+        public void setItem(ItemStack itemStack) {
+            inventory.setItem(slot, itemStack);
+        }
     }
 }
