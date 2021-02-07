@@ -18,6 +18,7 @@
  */
 package com.github.ms5984.api.menuman;
 
+import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -32,20 +33,17 @@ import java.util.Optional;
  * Class which encapsulates relevant data of InventoryClickEvent
  */
 public class MenuClick {
+    /**
+     * Get the player that clicked the Menu.
+     * @return player
+     */
+    @Getter
     protected final Player player;
     private final InventoryClickEvent inventoryClickEvent;
 
     protected MenuClick(InventoryClickEvent e, Player player) {
         this.player = player;
         inventoryClickEvent = e;
-    }
-
-    /**
-     * Get the player that clicked the Menu.
-     * @return player
-     */
-    public Player getPlayer() {
-        return player;
     }
 
     /**
