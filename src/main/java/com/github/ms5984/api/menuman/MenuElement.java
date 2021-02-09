@@ -18,8 +18,8 @@
  */
 package com.github.ms5984.api.menuman;
 
+import lombok.val;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,8 +49,8 @@ public class MenuElement {
     @SuppressWarnings("ConstantConditions")
     public ItemStack generateComplete() {
         if (displayName != null || lore != null) {
-            final ItemStack finalItem = new ItemStack(baseItem);
-            final ItemMeta meta = finalItem.getItemMeta();
+            val finalItem = new ItemStack(baseItem);
+            val meta = finalItem.getItemMeta();
             if (displayName != null) {
                 meta.setDisplayName(displayName);
             }

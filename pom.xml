@@ -17,6 +17,22 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <licenses>
+        <license>
+            <name>GNU Lesser General Public License v3.0 only</name>
+            <url>https://www.gnu.org/licenses/lgpl-3.0-standalone.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>ms5984</id>
+            <name>Matt</name>
+            <url>https://github.com/ms5984</url>
+        </developer>
+    </developers>
+
     <build>
         <plugins>
             <plugin>

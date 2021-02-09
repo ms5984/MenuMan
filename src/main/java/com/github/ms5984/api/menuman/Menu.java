@@ -18,8 +18,8 @@
  */
 package com.github.ms5984.api.menuman;
 
+import lombok.val;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -108,13 +108,13 @@ public final class Menu {
                 if (cancelClickLower) e.setCancelled(true);
                 return;
             }
-            final HumanEntity whoClicked = e.getWhoClicked();
+            val whoClicked = e.getWhoClicked();
             // if for some reason the click isn't a player, ignore it
             if (!(whoClicked instanceof Player)) {
                 return;
             }
-            final Player player = (Player) whoClicked;
-            final int slot = e.getSlot();
+            val player = (Player) whoClicked;
+            val slot = e.getSlot();
             // if this is a menu click (top inventory)
             if (e.getClickedInventory() == e.getInventory()) {
                 // search the menu elements map for the slot
