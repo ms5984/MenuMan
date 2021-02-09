@@ -31,6 +31,7 @@ public interface MenuAction {
 
     /**
      * Close the inventory of the player.
+     * @param menuClick a MenuClick object
      */
     static void CloseInventory(MenuClick menuClick) {
         menuClick.player.closeInventory();

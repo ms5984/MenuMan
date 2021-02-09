@@ -27,7 +27,7 @@ import java.util.Map;
 /**
  * Fluid interface menu builder
  */
-public class MenuBuilder {
+public final class MenuBuilder {
 
     public final Menu.InventoryRows numberOfRows;
     protected final Map<Integer, MenuElement> items = new HashMap<>();
@@ -133,6 +133,7 @@ public class MenuBuilder {
     /**
      * Create the Menu specified by the contents of this builder.
      * <p>Requires plugin reference for event syncing.</p>
+     * @param yourPlugin an instance of your plugin
      * @return new Menu initialized with this object's contents
      */
     public Menu create(JavaPlugin yourPlugin) {

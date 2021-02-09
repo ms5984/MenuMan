@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ElementBuilder {
+public final class ElementBuilder {
     protected final MenuBuilder menuBuilder;
     protected MenuAction menuAction;
     protected MenuElement menuElement;
@@ -37,6 +37,7 @@ public class ElementBuilder {
     /**
      * Set a new action for this element.
      * @param menuAction which accepts MenuClick
+     * @return this builder
      */
     public ElementBuilder setAction(MenuAction menuAction) {
         this.menuAction = menuAction;
@@ -46,6 +47,7 @@ public class ElementBuilder {
     /**
      * Set a new base item for this element.
      * @param itemStack a valid ItemStack
+     * @return this builder
      */
     public ElementBuilder setItem(@NotNull ItemStack itemStack) {
         this.menuElement.baseItem = itemStack;
@@ -55,6 +57,7 @@ public class ElementBuilder {
     /**
      * Set a new display text for this element.
      * @param text display name of item
+     * @return this builder
      */
     public ElementBuilder setText(String text) {
         this.menuElement.displayName = text;
@@ -64,6 +67,7 @@ public class ElementBuilder {
     /**
      * Set new lore text for this element.
      * @param lore String varargs new lore
+     * @return this builder
      */
     public ElementBuilder setLore(String... lore) {
         this.menuElement.lore = new ArrayList<>(Arrays.asList(lore));
@@ -73,6 +77,7 @@ public class ElementBuilder {
     /**
      * Add a line to lore for this element.
      * @param line line of lore to be added
+     * @return this builder
      */
     public ElementBuilder addLore(@NotNull String line) {
         this.menuElement.lore.add(line);
@@ -84,6 +89,7 @@ public class ElementBuilder {
      * <p>Slots are zero-indexed: the first row is 0-8, not 1-9.</p>
      * @param slots varargs of desired slots
      * @throws IllegalArgumentException if any int outside of inventory range
+     * @return the MenuBuilder
      */
     public MenuBuilder assignToSlots(int... slots) throws IllegalArgumentException {
         for (int slot : slots) {

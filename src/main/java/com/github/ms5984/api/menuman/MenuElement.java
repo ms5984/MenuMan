@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Encapsulation to promote lazy-initialization of ItemStacks
  */
-public class MenuElement {
+public final class MenuElement {
     protected ItemStack baseItem;
     protected String displayName;
     protected List<String> lore;
