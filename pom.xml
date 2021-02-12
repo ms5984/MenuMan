@@ -6,7 +6,7 @@
 
     <groupId>com.github.ms5984.api</groupId>
     <artifactId>MenuMan</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <name>MenuMan</name>
@@ -94,7 +94,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.2.0</version>
                 <configuration>
-                    <doclint>reference,syntax</doclint>
+                    <doclint>missing,reference,syntax</doclint>
                     <sourcepath>${project.build.directory}/generated-sources/delombok</sourcepath>
                 </configuration>
                 <executions>

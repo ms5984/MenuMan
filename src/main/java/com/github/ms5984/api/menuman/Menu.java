@@ -117,6 +117,7 @@ public final class Menu {
         /**
          * Process InventoryClickEvent and encapsulate to send
          * to MenuAction if so defined.
+         * @param e original click event
          */
         @EventHandler
         public void onMenuClick(InventoryClickEvent e) {
@@ -157,7 +158,8 @@ public final class Menu {
         }
 
         /**
-         * Process InventoryOpenEvent.
+         * Process {@link InventoryOpenEvent}.
+         * @param e original InventoryOpenEvent.
          * <p>If the currently made {@link Inventory} is opened again
          * by another player before the task timer has elapsed,
          * cancel the current destruction task.</p>
@@ -182,6 +184,7 @@ public final class Menu {
          *     <li>Sets this task to run in ten ticks,
          *     trying again every 50 ticks until all viewers have left.</li>
          * </ul>
+         * @param e original InventoryCloseEvent
          */
         @EventHandler
         public void onMenuClose(InventoryCloseEvent e) {
