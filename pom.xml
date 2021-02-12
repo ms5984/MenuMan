@@ -94,6 +94,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.2.0</version>
                 <configuration>
+                    <doclint>reference,syntax</doclint>
                     <sourcepath>${project.build.directory}/generated-sources/delombok</sourcepath>
                 </configuration>
                 <executions>
@@ -102,9 +103,6 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
-                        <configuration>
-                            <doclint>none</doclint>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>

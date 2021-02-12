@@ -22,16 +22,16 @@ package com.github.ms5984.api.menuman;
  * Functional interface which defines behavior on use of a Menu's actions.
  */
 @FunctionalInterface
-public interface MenuAction {
+public interface ClickAction {
     /**
      * When this action is called, what should happen?
-     * @param behavior MenuClick consumer
+     * @param menuClick encapsulation which provides data about the click event
      */
-    void onClick(MenuClick behavior);
+    void onClick(MenuClick menuClick);
 
     /**
      * Close the inventory of the player.
-     * @param menuClick a MenuClick object
+     * @param menuClick encapsulation which provides data about the click event
      */
     static void CloseInventory(MenuClick menuClick) {
         menuClick.player.closeInventory();

@@ -29,13 +29,32 @@ import java.util.List;
  * Encapsulation to promote lazy-initialization of ItemStacks
  */
 public final class MenuElement {
+    /**
+     * Initial ItemStack. May or may not be styled.
+     */
     protected ItemStack baseItem;
+    /**
+     * A custom title for the final ItemStack.
+     */
     protected String displayName;
+    /**
+     * A custom description for the ItemStack.
+     */
     protected List<String> lore;
 
+    /**
+     * Specify MenuElement with no initial styling.
+     * @param baseItem ItemStack to copy
+     */
     protected MenuElement(ItemStack baseItem) {
-        this(baseItem, null);
+        this.baseItem = baseItem;
     }
+    /**
+     * Specify MenuElement with preconfigured styling.
+     * @param baseItem ItemStack to copy
+     * @param text custom text
+     * @param lore custom lore
+     */
     protected MenuElement(ItemStack baseItem, String text, String... lore) {
         this.baseItem = baseItem;
         this.displayName = text;

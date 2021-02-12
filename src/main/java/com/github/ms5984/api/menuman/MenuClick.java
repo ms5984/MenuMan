@@ -33,9 +33,17 @@ import java.util.Optional;
  * Class which encapsulates relevant data of InventoryClickEvent
  */
 public final class MenuClick {
+    /**
+     * The player who clicked the Menu.
+     */
     protected final Player player;
     private final InventoryClickEvent inventoryClickEvent;
 
+    /**
+     * Create a {@link MenuClick} to pass to a MenuAction.
+     * @param e original event
+     * @param player a player
+     */
     protected MenuClick(InventoryClickEvent e, Player player) {
         this.player = player;
         inventoryClickEvent = e;
@@ -100,8 +108,17 @@ public final class MenuClick {
         inventoryClickEvent.setCancelled(true);
     }
 
-    private static class InventorySlot {
+    /**
+     * An encapsulation of inventory slot interactions.
+     */
+    public static class InventorySlot {
+        /**
+         * The clicked inventory.
+         */
         protected final Inventory inventory;
+        /**
+         * The index of the slot clicked.
+         */
         protected final int slot;
 
         private InventorySlot(Inventory inventory, int slot) {

@@ -28,19 +28,43 @@ import java.util.Map;
  * Fluid interface menu builder
  */
 public final class MenuBuilder {
-
+    /**
+     * Describes the number of rows and slots in the final Menu.
+     */
     public final Menu.InventoryRows numberOfRows;
+    /**
+     * ItemStack to slot mappings.
+     */
     protected final Map<Integer, MenuElement> items = new HashMap<>();
-    protected final Map<Integer, MenuAction> actions = new HashMap<>();
+    /**
+     * MenuAction to slot mappings.
+     */
+    protected final Map<Integer, ClickAction> actions = new HashMap<>();
+    /**
+     * Callback to run on menu close. Defaults to null.
+     */
+    protected CloseAction closeAction;
+    /**
+     * Title of the final Menu inventory.
+     */
     protected String title;
+    /**
+     * Initial contents of the menu inventory before elements are added.
+     */
     protected ItemStack[] initialContents;
+    /**
+     * Determine whether clicks on the lower inventory should be cancelled.
+     */
     protected boolean cancelLowerInvClick;
+    /**
+     * Allow items to be removed from the menu inventory.
+     */
     protected boolean allowItemPickup;
 
     /**
      * Create a new MenuBuilder with a number of rows and a title.
-     * <p>Menu will be blank and elements added.</p>
-     * @param rows {@link Menu.InventoryRows} number to generate
+     * <p>Menu will start out blank and elements will added.</p>
+     * @param rows number of rows in final Inventory
      * @param title Title of generated inventory
      */
     public MenuBuilder(Menu.InventoryRows rows, String title) {
@@ -50,7 +74,7 @@ public final class MenuBuilder {
 
     /**
      * Create a new MenuBuilder with rows, title and initial contents.
-     * @param rows number of rows
+     * @param rows number of rows in final Inventory
      * @param title Title of generated inventory
      * @param initialContents an array of items to prefill the menu with
      */
@@ -61,9 +85,20 @@ public final class MenuBuilder {
     }
 
     /**
-     * Set a new title for the menu
+     * Define a callback to run on inventory close.
+     * <p>Null by default; set to null to disable.</p>
+     * @param closeAction a CloseAction or null for none
+     * @return this MenuBuilder
+     */
+    public MenuBuilder setCloseAction(CloseAction closeAction) {
+        this.closeAction = closeAction;
+        return this;
+    }
+
+    /**
+     * Set a new title for the menu.
      * @param title a new title for the generate menu
-     * @return same MenuBuilder object
+     * @return this MenuBuilder
      */
     public MenuBuilder setTitle(String title) {
         this.title = title;
@@ -75,7 +110,7 @@ public final class MenuBuilder {
      * <p>This happens after creation of the inventory but before
      * menu elements are processed.</p>
      * @param contents an array of items
-     * @return same MenuBuilder object
+     * @return this MenuBuilder
      */
     public MenuBuilder setInitialContents(ItemStack[] contents) {
         this.initialContents = contents;
@@ -88,7 +123,7 @@ public final class MenuBuilder {
      * pickup logic for specific elements (for instance, an item
      * vault system with pagination, possibly a sub-menu).</p>
      * @param allowPickup whether to allow item pickup
-     * @return same MenuBuilder object
+     * @return this MenuBuilder
      */
     public MenuBuilder defaultClickBehavior(boolean allowPickup) {
         this.allowItemPickup = allowPickup;
@@ -99,7 +134,7 @@ public final class MenuBuilder {
      * Should ALL clicks on the lower inventory be cancelled as well?
      * <p>False by default.</p>
      * @param toCancel true to cancel clicks on lower
-     * @return same MenuBuilder object
+     * @return this MenuBuilder
      */
     public MenuBuilder cancelLowerInventoryClicks(boolean toCancel) {
         this.cancelLowerInvClick = toCancel;

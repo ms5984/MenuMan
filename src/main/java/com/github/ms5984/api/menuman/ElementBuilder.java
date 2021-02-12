@@ -24,11 +24,19 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Fluent interface builder for menu elements
+ */
 public final class ElementBuilder {
-    protected final MenuBuilder menuBuilder;
-    protected MenuAction menuAction;
-    protected MenuElement menuElement;
+    private final MenuBuilder menuBuilder;
+    private final MenuElement menuElement;
+    private ClickAction menuAction;
 
+    /**
+     * Create an {@link ElementBuilder} for a MenuBuilder with a MenuElement.
+     * @param menuBuilder the target MenuBuilder
+     * @param menuElement a new MenuElement
+     */
     protected ElementBuilder(MenuBuilder menuBuilder, MenuElement menuElement) {
         this.menuBuilder = menuBuilder;
         this.menuElement = menuElement;
@@ -36,11 +44,11 @@ public final class ElementBuilder {
 
     /**
      * Set a new action for this element.
-     * @param menuAction which accepts MenuClick
+     * @param clickAction which accepts MenuClick
      * @return this builder
      */
-    public ElementBuilder setAction(MenuAction menuAction) {
-        this.menuAction = menuAction;
+    public ElementBuilder setAction(ClickAction clickAction) {
+        this.menuAction = clickAction;
         return this;
     }
 

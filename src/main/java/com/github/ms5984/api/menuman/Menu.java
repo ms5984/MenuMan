@@ -42,13 +42,31 @@ public final class Menu {
     private final JavaPlugin plugin;
     private final ItemStack[] initialContents;
     private final Map<Integer, ItemStack> contents;
-    private final Map<Integer, MenuAction> actions;
+    private final Map<Integer, ClickAction> actions;
+    private final CloseAction closeAction;
+    /**
+     * Number of rows in the generated Inventory.
+     */
     public final InventoryRows numberOfRows;
+    /**
+     * Title of generated Inventory.
+     */
     public final String title;
+    /**
+     * Defines whether clicks on lower inventory are cancelled.
+     */
     public final boolean cancelClickLower;
+    /**
+     * Defines default item pickup behavior for top inventory.
+     */
     public final boolean allowPickupFromMenu;
     private Inventory inventory;
 
+    /**
+     * Create a new Menu using the data from a builder and a plugin reference.
+     * @param menuBuilder a MenuBuilder
+     * @param javaPlugin your plugin
+     */
     protected Menu(MenuBuilder menuBuilder, JavaPlugin javaPlugin) {
         this.plugin = javaPlugin;
         this.numberOfRows = menuBuilder.numberOfRows;
@@ -57,6 +75,7 @@ public final class Menu {
         this.cancelClickLower = menuBuilder.cancelLowerInvClick;
         this.allowPickupFromMenu = menuBuilder.allowItemPickup;
         this.actions = menuBuilder.actions;
+        this.closeAction = menuBuilder.closeAction;
         contents = new HashMap<>(numberOfRows.slotCount);
         menuBuilder.items.forEach((index, element) -> contents.put(index, element.generateComplete()));
         Bukkit.getPluginManager().registerEvents(new ClickListener(), plugin);
@@ -87,10 +106,13 @@ public final class Menu {
     }
 
     /**
-     * Registered listener which passes information to the actions.
+     * Registered listener which passes Inventory event
+     * information to the menu's actions.
      */
-    private class ClickListener implements Listener {
+    protected class ClickListener implements Listener {
         private transient BukkitRunnable pendingDelete;
+
+        private ClickListener() {}
 
         /**
          * Process InventoryClickEvent and encapsulate to send
@@ -135,8 +157,10 @@ public final class Menu {
         }
 
         /**
-         * If the menu is opened again by another player before
-         * it is destroyed, cancel the destruction task.
+         * Process InventoryOpenEvent.
+         * <p>If the currently made {@link Inventory} is opened again
+         * by another player before the task timer has elapsed,
+         * cancel the current destruction task.</p>
          */
         @EventHandler
         public void onMenuOpen(InventoryOpenEvent e) {
@@ -150,14 +174,23 @@ public final class Menu {
         }
 
         /**
-         * Null the inventory after all viewers have closed it.
-         * <p>Sets a task to run in ten ticks, trying again every
-         * 50 ticks until all viewers have left.</p>
+         * Perform close logic and schedule cleanup.
+         * <p>These steps include running the CloseAction callback
+         * (if present) and then the following:</p>
+         * <ul>
+         *     <li>Setup a task to null the inventory after all viewers have closed it.</li>
+         *     <li>Sets this task to run in ten ticks,
+         *     trying again every 50 ticks until all viewers have left.</li>
+         * </ul>
          */
         @EventHandler
         public void onMenuClose(InventoryCloseEvent e) {
             if (e.getInventory() != inventory) {
                 return;
+            }
+            val closer = e.getPlayer();
+            if (closeAction != null && closer instanceof Player) {
+                closeAction.onClose(new MenuClose(e, (Player) closer));
             }
             pendingDelete = new BukkitRunnable() {
                 @Override
@@ -183,6 +216,9 @@ public final class Menu {
         FIVE(45),
         SIX(54);
 
+        /**
+         * Number of slots in an Inventory of these rows.
+         */
         public final int slotCount;
 
         InventoryRows(int slots) {
