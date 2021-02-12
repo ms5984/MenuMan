@@ -1,4 +1,6 @@
 ## Welcome to MenuMan
+![Maven Central](https://img.shields.io/maven-central/v/com.github.ms5984.api/MenuMan)
+![GitHub tag (latest pre-release)](https://img.shields.io/github/v/tag/ms5984/MenuMan?include_prereleases)
 
 ### Implementation
 Create a new MenuBuilder object and follow the fluid interface where it takes you.
@@ -22,6 +24,16 @@ class MyMenuClass {
                 .assignToSlots(0, 2).create(plugin);
     }
 }
+```
+
+### Importing
+Just add the following into your `pom.xml`. No additional repository needed!
+```xml
+    <dependency>
+        <groupId>com.github.ms5984.api</groupId>
+        <artifactId>MenuMan</artifactId>
+        <version>1.0.0</version>
+    </dependency>
 ```
 
 As always, you are welcome to use the issue tracker, open a PR or contact me directly.
