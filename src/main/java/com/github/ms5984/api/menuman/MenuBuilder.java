@@ -77,7 +77,7 @@ public final class MenuBuilder {
      * @param rows number of rows in final Inventory
      * @param title Title of generated inventory
      * @param initialContents an array of items to prefill the menu with
-     * @throws IllegalArgumentException if initialContents.length > slots
+     * @throws IllegalArgumentException if initialContents.length &gt; slots
      */
     public MenuBuilder(Menu.InventoryRows rows, String title, ItemStack[] initialContents) {
         this.numberOfRows = rows;
