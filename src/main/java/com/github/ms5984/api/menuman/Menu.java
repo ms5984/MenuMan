@@ -59,6 +59,10 @@ public final class Menu {
      * Defines default item pickup behavior for top inventory.
      */
     public final boolean allowPickupFromMenu;
+    /**
+     * Defines shift-click behavior on the lower inventory.
+     */
+    public final boolean allowShiftClickLower;
     private Inventory inventory;
 
     /**
@@ -73,6 +77,7 @@ public final class Menu {
         this.initialContents = menuBuilder.initialContents;
         this.cancelClickLower = menuBuilder.cancelLowerInvClick;
         this.allowPickupFromMenu = menuBuilder.allowItemPickup;
+        this.allowShiftClickLower = menuBuilder.allowLowerInvShiftClick;
         this.actions = menuBuilder.actions;
         this.closeAction = menuBuilder.closeAction;
         contents = new HashMap<>(numberOfRows.slotCount);
@@ -151,6 +156,7 @@ public final class Menu {
             if (e.getClickedInventory() == e.getView().getBottomInventory()) {
                 // and we want to cancel clicks for the bottom, cancel the event
                 if (cancelClickLower) e.setCancelled(true);
+                if (e.getCurrentItem() != null || !allowShiftClickLower) e.setCancelled(true);
                 return;
             }
             val whoClicked = e.getWhoClicked();
@@ -220,6 +226,7 @@ public final class Menu {
             pendingDelete = new BukkitRunnable() {
                 @Override
                 public void run() {
+                    if (inventory == null) cancel();
                     if (inventory.getViewers().isEmpty()) {
                         inventory = null;
                         this.cancel();

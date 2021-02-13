@@ -60,6 +60,10 @@ public final class MenuBuilder {
      * Allow items to be removed from the menu inventory.
      */
     protected boolean allowItemPickup;
+    /**
+     * Allow shift-clicking of items from the lower inventory.
+     */
+    protected boolean allowLowerInvShiftClick;
 
     /**
      * Create a new MenuBuilder with a number of rows and a title.
@@ -141,6 +145,18 @@ public final class MenuBuilder {
      */
     public MenuBuilder cancelLowerInventoryClicks(boolean toCancel) {
         this.cancelLowerInvClick = toCancel;
+        return this;
+    }
+
+    /**
+     * Should shift-clicks on the lower inventory be allowed?
+     * <p>Care should be taken to ensure menu elements aren't
+     * altered by items provided. Defaults to false.</p>
+     * @param toAllow allow shift-clicks on item
+     * @return this MenuBuilder
+     */
+    public MenuBuilder allowLowerShiftClicks(boolean toAllow) {
+        this.allowLowerInvShiftClick = toAllow;
         return this;
     }
 
