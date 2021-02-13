@@ -31,9 +31,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * A class representing a created Menu.
@@ -103,6 +102,29 @@ public final class Menu {
      */
     public void open(Player player) {
         player.openInventory(getInventory());
+    }
+
+    /**
+     * Gets the Inventory at this exact moment.
+     * <p>Expressed as an Optional (no viewers = no Inventory).</p>
+     * <p><b>Not</b> async safe.</p>
+     * @return an Optional describing the currently generated Inventory
+     */
+    public Optional<Inventory> getCurrentInventory() {
+        return Optional.ofNullable(inventory);
+    }
+
+    /**
+     * Get all Players currently viewing this menu.
+     * <p>Returns an empty set if inventory == null</p>
+     * @return a set of Players viewing this menu
+     */
+    public Set<Player> getViewers() {
+        if (inventory == null) return Collections.emptySet();
+        return inventory.getViewers().parallelStream()
+                .filter(he -> he instanceof Player)
+                .map(he -> (Player) he)
+                .collect(Collectors.toSet());
     }
 
     /**
