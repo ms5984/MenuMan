@@ -156,8 +156,13 @@ public final class Menu {
             if (e.getClickedInventory() == e.getView().getBottomInventory()) {
                 // and we want to cancel clicks for the bottom, cancel the event
                 if (cancelClickLower) e.setCancelled(true);
-                if (e.getCurrentItem() != null || !allowShiftClickLower) e.setCancelled(true);
+                // if the item clicked is not null and we are not allowing shift clicks
+                if (e.getCurrentItem() != null && !allowShiftClickLower) e.setCancelled(true);
                 return;
+            }
+            // If the player used hotkeys, cancel the event
+            if (e.getHotbarButton() != -1) {
+                e.setCancelled(true);
             }
             val whoClicked = e.getWhoClicked();
             // if for some reason the click isn't a player, ignore it
