@@ -28,31 +28,56 @@ class MyMenuClass {
 ```
 
 ### Importing
-Just add the following into your `pom.xml`. No additional repository needed!
+Releases: Just add the following into your `pom.xml`. No additional repository needed!
 ```xml
-    <!-- For Maven/Sonatype snapshots -->
-    <dependency>
-        <groupId>com.github.ms5984.api</groupId>
-        <artifactId>MenuMan</artifactId>
-        <version>1.0.1</version>
-    </dependency>
+    <!-- For Maven Central releases -->
+    <dependencies>
+        <dependency>
+            <groupId>com.github.ms5984.api</groupId>
+            <artifactId>MenuMan</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+    </dependencies>
 ```
-GitHub+Jitpack
+Snapshots (requires sonatype repository)
+```xml
+    <!-- For Sonatype Nexus snapshots (primary development here) -->
+    <repositories>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <!-- Configure a custom artifact timeout -->
+                <updatePolicy>interval:2</updatePolicy>
+                <!-- re-downloads artifacts over two minutes old -->
+            </snapshots>
+        </repository>
+    </repositories>
+    <dependencies>
+        <dependency>
+            <groupId>com.github.ms5984.api</groupId>
+            <artifactId>MenuMan</artifactId>
+            <version>1.0.3-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+```
+GitHub+Jitpack (requires jitpack repository)
 ```xml
     <!-- For Jitpack pre-release, custom commit builds -->
-<repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io/</url>
-    </repository>
-</repositories>
-<dependencies>
-    <dependency>
-        <groupId>com.github.ms5984</groupId>
-        <artifactId>MenuMan</artifactId>
-        <version>553c54d</version>
-    </dependency>
-</dependencies>
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io/</url>
+        </repository>
+    </repositories>
+    <dependencies>
+        <dependency>
+            <groupId>com.github.ms5984</groupId>
+            <artifactId>MenuMan</artifactId>
+            <version>553c54d</version>
+        </dependency>
+    </dependencies>
 ```
 
 As always, you are welcome to use the issue tracker, open a PR or contact me directly.
