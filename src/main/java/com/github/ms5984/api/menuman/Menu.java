@@ -89,7 +89,7 @@ public final class Menu {
     private Inventory getInventory() {
         if (inventory == null) {
             inventory = Bukkit.createInventory(null, numberOfRows.slotCount, title);
-            inventory.setContents(Arrays.copyOfRange(initialContents, 0, numberOfRows.slotCount));
+            if (initialContents != null) inventory.setContents(initialContents);
             for (Map.Entry<Integer, ItemStack> element : contents.entrySet()) {
                 inventory.setItem(element.getKey(), element.getValue());
             }

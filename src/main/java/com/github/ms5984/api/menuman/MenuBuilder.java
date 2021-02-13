@@ -77,10 +77,13 @@ public final class MenuBuilder {
      * @param rows number of rows in final Inventory
      * @param title Title of generated inventory
      * @param initialContents an array of items to prefill the menu with
+     * @throws IllegalArgumentException if initialContents.length > slots
      */
     public MenuBuilder(Menu.InventoryRows rows, String title, ItemStack[] initialContents) {
         this.numberOfRows = rows;
         this.title = title;
+        if (initialContents.length > rows.slotCount)
+            throw new IllegalArgumentException("Initial contents larger than inventory slots!");
         this.initialContents = initialContents;
     }
 
