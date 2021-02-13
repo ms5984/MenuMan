@@ -1,6 +1,7 @@
 ## Welcome to MenuMan
-![Maven Central](https://img.shields.io/maven-central/v/com.github.ms5984.api/MenuMan)
-![GitHub tag (latest pre-release)](https://img.shields.io/github/v/tag/ms5984/MenuMan?include_prereleases)
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.ms5984.api/MenuMan)](https://oss.sonatype.org/#nexus-search;quick~MenuMan)
+[![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/com.github.ms5984.api/MenuMan?server=https%3A%2F%2Foss.sonatype.org)](https://oss.sonatype.org/#nexus-search;quick~MenuMan)
+[![GitHub tag (latest pre-release)](https://img.shields.io/github/v/tag/ms5984/MenuMan?include_prereleases)](https://github.com/ms5984/MenuMan/releases)
 
 ### Implementation
 Create a new MenuBuilder object and follow the fluent interface where it takes you.
@@ -29,11 +30,29 @@ class MyMenuClass {
 ### Importing
 Just add the following into your `pom.xml`. No additional repository needed!
 ```xml
+    <!-- For Maven/Sonatype snapshots -->
     <dependency>
         <groupId>com.github.ms5984.api</groupId>
         <artifactId>MenuMan</artifactId>
         <version>1.0.1</version>
     </dependency>
+```
+GitHub+Jitpack
+```xml
+    <!-- For Jitpack pre-release, custom commit builds -->
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io/</url>
+    </repository>
+</repositories>
+<dependencies>
+    <dependency>
+        <groupId>com.github.ms5984</groupId>
+        <artifactId>MenuMan</artifactId>
+        <version>553c54d</version>
+    </dependency>
+</dependencies>
 ```
 
 As always, you are welcome to use the issue tracker, open a PR or contact me directly.
