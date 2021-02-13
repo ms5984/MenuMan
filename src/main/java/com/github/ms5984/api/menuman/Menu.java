@@ -25,6 +25,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -189,6 +190,23 @@ public final class Menu {
             if (actions.containsKey(slot)) {
                 // run action function
                 actions.get(slot).onClick(new MenuClick(e, player));
+            }
+        }
+
+        /**
+         * Process {@link InventoryDragEvent}.
+         * <p>Cancel item drag events which include the top inventory.</p>
+         * @param e original InventoryDragEvent
+         */
+        @EventHandler
+        public void onMenuDrag(InventoryDragEvent e) {
+            // If the top inventory isn't ours, ignore it
+            if (e.getInventory() != inventory) {
+                return;
+            }
+            // If the slots include the top inventory, cancel the event
+            if (e.getRawSlots().parallelStream().anyMatch(slot -> slot < numberOfRows.slotCount)) {
+                e.setCancelled(true);
             }
         }
 
