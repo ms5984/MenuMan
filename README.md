@@ -3,9 +3,9 @@
 ![GitHub tag (latest pre-release)](https://img.shields.io/github/v/tag/ms5984/MenuMan?include_prereleases)
 
 ### Implementation
-Create a new MenuBuilder object and follow the fluid interface where it takes you.
+Create a new MenuBuilder object and follow the fluent interface where it takes you.
 
-`MenuAction` describes a functional interface that accepts `MenuClick` objects,
+`ClickAction` describes a functional interface that accepts `MenuClick` objects,
 a native encapsulation of `InventoryClickEvent`. You'll find that class comes with
 an easy-to-use (by method reference), static helper method for the simple action of
 closing a player's inventory. It looks like this in the wild:
@@ -20,7 +20,7 @@ class MyMenuClass {
                 .addElement(new ItemStack(Material.DIRT))
                 .setText("I've got a jar of dirt!")
                 .setLore("I've got a jar of dirt!")
-                .setAction(MenuAction::CloseInventory) // Right here, it's a beaut.
+                .setAction(ClickAction::CloseInventory) // Right here, it's a beaut.
                 .assignToSlots(0, 2).create(plugin);
     }
 }
@@ -32,7 +32,7 @@ Just add the following into your `pom.xml`. No additional repository needed!
     <dependency>
         <groupId>com.github.ms5984.api</groupId>
         <artifactId>MenuMan</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </dependency>
 ```
 
