@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.github.ms5984.api.menuman;
+package com.github.ms5984.lib.menuman;
 
 import lombok.val;
 import org.bukkit.Bukkit;
@@ -129,7 +129,7 @@ public final class Menu {
         if (inventory == null) return Collections.emptySet();
         return inventory.getViewers().parallelStream()
                 .filter(he -> he instanceof Player)
-                .map(he -> (Player) he)
+                .map(Player.class::cast)
                 .collect(Collectors.toSet());
     }
 
@@ -138,7 +138,7 @@ public final class Menu {
      * information to the menu's actions.
      */
     protected class ClickListener implements Listener {
-        private transient BukkitRunnable pendingDelete;
+        private BukkitRunnable pendingDelete;
 
         private ClickListener() {}
 

@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.github.ms5984.api.menuman;
+package com.github.ms5984.lib.menuman;
 
 /**
  * Functional interface which defines behavior on use of a Menu's actions.
@@ -30,10 +30,10 @@ public interface ClickAction {
     void onClick(MenuClick menuClick);
 
     /**
-     * Close the inventory of the player.
+     * Close the Menu.
      * @param menuClick encapsulation which provides data about the click event
      */
-    static void CloseInventory(MenuClick menuClick) {
+    static void close(MenuClick menuClick) {
         menuClick.player.closeInventory();
     }
 }
