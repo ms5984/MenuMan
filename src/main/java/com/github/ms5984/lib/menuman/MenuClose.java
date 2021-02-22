@@ -35,6 +35,7 @@ public final class MenuClose {
 
     /**
      * Create a {@link MenuClose} to pass to a {@link CloseAction}.
+     *
      * @param e original event
      * @param player a player
      */
@@ -45,6 +46,7 @@ public final class MenuClose {
 
     /**
      * Get the player that clicked the Menu.
+     *
      * @return player
      */
     public Player getPlayer() {
@@ -53,6 +55,7 @@ public final class MenuClose {
 
     /**
      * Get the Menu inventory that is closing.
+     *
      * @return Menu inventory
      */
     public Inventory getUpperInventory() {
@@ -61,6 +64,7 @@ public final class MenuClose {
 
     /**
      * Get the full InventoryView of the transaction.
+     *
      * @return the InventoryView for the transaction
      */
     public InventoryView getInventoryView() {

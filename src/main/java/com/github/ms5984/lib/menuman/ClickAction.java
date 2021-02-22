@@ -25,12 +25,14 @@ package com.github.ms5984.lib.menuman;
 public interface ClickAction {
     /**
      * When this action is called, what should happen?
+     *
      * @param menuClick encapsulation which provides data about the click event
      */
     void onClick(MenuClick menuClick);
 
     /**
      * Close the Menu.
+     *
      * @param menuClick encapsulation which provides data about the click event
      */
     static void close(MenuClick menuClick) {

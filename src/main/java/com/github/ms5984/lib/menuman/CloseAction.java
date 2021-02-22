@@ -25,6 +25,7 @@ package com.github.ms5984.lib.menuman;
 public interface CloseAction {
     /**
      * When the menu is closed, what should happen?
+     *
      * @param menuClose encapsulation which provides data about the close event
      */
     void onClose(MenuClose menuClose);

@@ -44,6 +44,7 @@ public final class MenuElement {
 
     /**
      * Specify MenuElement with no initial styling.
+     *
      * @param baseItem ItemStack to copy
      */
     protected MenuElement(ItemStack baseItem) {
@@ -51,6 +52,7 @@ public final class MenuElement {
     }
     /**
      * Specify MenuElement with preconfigured styling.
+     *
      * @param baseItem ItemStack to copy
      * @param text custom text
      * @param lore custom lore
@@ -63,6 +65,7 @@ public final class MenuElement {
 
     /**
      * Generate the final ItemStack, styled if needed.
+     *
      * @return generated ItemStack
      */
     @SuppressWarnings("ConstantConditions")

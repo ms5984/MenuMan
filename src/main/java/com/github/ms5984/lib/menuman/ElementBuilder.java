@@ -34,6 +34,7 @@ public final class ElementBuilder {
 
     /**
      * Create an {@link ElementBuilder} for a MenuBuilder with a MenuElement.
+     *
      * @param menuBuilder the target MenuBuilder
      * @param menuElement a new MenuElement
      */
@@ -44,6 +45,7 @@ public final class ElementBuilder {
 
     /**
      * Set a new action for this element.
+     *
      * @param clickAction which accepts MenuClick
      * @return this builder
      */
@@ -54,6 +56,7 @@ public final class ElementBuilder {
 
     /**
      * Set a new base item for this element.
+     *
      * @param itemStack a valid ItemStack
      * @return this builder
      */
@@ -64,6 +67,7 @@ public final class ElementBuilder {
 
     /**
      * Set a new display text for this element.
+     *
      * @param text display name of item
      * @return this builder
      */
@@ -74,6 +78,7 @@ public final class ElementBuilder {
 
     /**
      * Set new lore text for this element.
+     *
      * @param lore String varargs new lore
      * @return this builder
      */
@@ -84,6 +89,7 @@ public final class ElementBuilder {
 
     /**
      * Add a line to lore for this element.
+     *
      * @param line line of lore to be added
      * @return this builder
      */
@@ -94,10 +100,12 @@ public final class ElementBuilder {
 
     /**
      * Assign this element to slots of the menu.
-     * <p>Slots are zero-indexed: the first row is 0-8, not 1-9.</p>
+     * <p>
+     * Slots are zero-indexed: the first row is 0-8, not 1-9.
+     *
      * @param slots varargs of desired slots
-     * @throws IllegalArgumentException if any int outside of inventory range
      * @return the MenuBuilder
+     * @throws IllegalArgumentException if any int outside of inventory range
      */
     public MenuBuilder assignToSlots(int... slots) throws IllegalArgumentException {
         for (int slot : slots) {

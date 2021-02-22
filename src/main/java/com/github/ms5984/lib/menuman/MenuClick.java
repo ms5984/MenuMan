@@ -40,7 +40,8 @@ public final class MenuClick {
     private final InventoryClickEvent inventoryClickEvent;
 
     /**
-     * Create a {@link MenuClick} to pass to a MenuAction.
+     * Create a {@link MenuClick} to pass to a {@link ClickAction}.
+     *
      * @param e original event
      * @param player a player
      */
@@ -51,6 +52,7 @@ public final class MenuClick {
 
     /**
      * Get the player that clicked the Menu.
+     *
      * @return player
      */
     public Player getPlayer() {
@@ -59,6 +61,7 @@ public final class MenuClick {
 
     /**
      * Get the full InventoryView of the transaction.
+     *
      * @return the InventoryView for the transaction
      */
     public InventoryView getInventoryView() {
@@ -67,7 +70,9 @@ public final class MenuClick {
 
     /**
      * Get the {@link ClickType} of this event.
-     * <p>Feel free to explore the enum, it looks powerful.</p>
+     * <p>
+     * Feel free to explore the enum, it looks powerful.
+     *
      * @return {@link InventoryClickEvent#getClick()}
      */
     public ClickType getClickType() {
@@ -76,6 +81,7 @@ public final class MenuClick {
 
     /**
      * Get an Optional describing the slot clicked, if applicable.
+     *
      * @return an Optional of the clicked InventorySlot
      */
     public Optional<InventorySlot> getSlotClicked() {
@@ -86,8 +92,10 @@ public final class MenuClick {
 
     /**
      * Check for the item currently on the cursor.
-     * <p>This is usually null, so instead of using the Nullable
-     * annotation here I chose to use {@link Optional#ofNullable}.</p>
+     * <p>
+     * This is usually null, so instead of using the Nullable
+     * annotation here I chose to return an {@link Optional}.
+     *
      * @return an Optional describing an ItemStack or an empty Optional
      */
     public Optional<ItemStack> getItemOnMouseCursor() {
@@ -128,6 +136,7 @@ public final class MenuClick {
 
         /**
          * Get the Inventory that was clicked.
+         *
          * @return clicked inventory
          */
         public Inventory getClickedInventory() {
@@ -136,6 +145,7 @@ public final class MenuClick {
 
         /**
          * Get the index of the slot.
+         *
          * @return {@link InventoryClickEvent#getSlot()}
          * (value in context of clicked inventory)
          */
@@ -145,6 +155,7 @@ public final class MenuClick {
 
         /**
          * Get the item in the slot.
+         *
          * @return the current item or null
          */
         @Nullable
@@ -154,6 +165,7 @@ public final class MenuClick {
 
         /**
          * Set a new item in the slot.
+         *
          * @param itemStack a new item
          */
         public void setItem(ItemStack itemStack) {

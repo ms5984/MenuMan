@@ -68,6 +68,7 @@ public final class Menu {
 
     /**
      * Create a new Menu using the data from a builder and a plugin reference.
+     *
      * @param menuBuilder a MenuBuilder
      * @param javaPlugin your plugin
      */
@@ -88,7 +89,9 @@ public final class Menu {
 
     /**
      * Lazy initialization of inventory on first get.
-     * <p>Added bonus: listener returns faster before getInventory is called.</p>
+     * <p>
+     * Added bonus: listener returns faster before getInventory is called.
+     *
      * @return generated Inventory
      */
     private Inventory getInventory() {
@@ -104,6 +107,7 @@ public final class Menu {
 
     /**
      * Open this Menu for the given player.
+     *
      * @param player player to open menu for
      */
     public void open(Player player) {
@@ -112,8 +116,10 @@ public final class Menu {
 
     /**
      * Gets the Inventory at this exact moment.
-     * <p>Expressed as an Optional (no viewers = no Inventory).</p>
-     * <p><b>Not</b> async safe.</p>
+     * <p>
+     * Expressed as an Optional (no viewers = no Inventory).
+     * <p><b>Not</b> async safe.
+     *
      * @return an Optional describing the currently generated Inventory
      */
     public Optional<Inventory> getCurrentInventory() {
@@ -122,7 +128,9 @@ public final class Menu {
 
     /**
      * Get all Players currently viewing this menu.
-     * <p>Returns an empty set if inventory == null</p>
+     * <p>
+     * Returns an empty set if inventory == null
+     *
      * @return a set of Players viewing this menu
      */
     public Set<Player> getViewers() {
@@ -145,6 +153,7 @@ public final class Menu {
         /**
          * Process InventoryClickEvent and encapsulate to send
          * to MenuAction if so defined.
+         *
          * @param e original click event
          */
         @EventHandler
@@ -195,7 +204,9 @@ public final class Menu {
 
         /**
          * Process {@link InventoryDragEvent}.
-         * <p>Cancel item drag events which include the top inventory.</p>
+         * <p>
+         * Cancel item drag events which include the top inventory.
+         *
          * @param e original InventoryDragEvent
          */
         @EventHandler
@@ -212,10 +223,12 @@ public final class Menu {
 
         /**
          * Process {@link InventoryOpenEvent}.
-         * @param e original InventoryOpenEvent.
-         * <p>If the currently made {@link Inventory} is opened again
+         * <p>
+         * If the currently made {@link Inventory} is opened again
          * by another player before the task timer has elapsed,
-         * cancel the current destruction task.</p>
+         * cancel the current destruction task.
+         *
+         * @param e original InventoryOpenEvent.
          */
         @EventHandler
         public void onMenuOpen(InventoryOpenEvent e) {
@@ -231,12 +244,13 @@ public final class Menu {
         /**
          * Perform close logic and schedule cleanup.
          * <p>These steps include running the CloseAction callback
-         * (if present) and then the following:</p>
+         * (if present) and then the following:
          * <ul>
-         *     <li>Setup a task to null the inventory after all viewers have closed it.</li>
-         *     <li>Sets this task to run in ten ticks,
-         *     trying again every 50 ticks until all viewers have left.</li>
-         * </ul>
+         *     <li>Setup a task to null the inventory after all
+         *     viewers have closed it.
+         *     <li>Sets this task to run in ten ticks, trying again every
+         *     50 ticks until all viewers have left.
+         *
          * @param e original InventoryCloseEvent
          */
         @EventHandler
