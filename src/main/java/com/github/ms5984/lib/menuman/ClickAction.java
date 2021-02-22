@@ -18,6 +18,9 @@
  */
 package com.github.ms5984.lib.menuman;
 
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+
 /**
  * Functional interface which defines behavior on use of a Menu's actions.
  */
@@ -32,10 +35,21 @@ public interface ClickAction {
 
     /**
      * Close the Menu.
+     * <p>
+     * Note: closeInventory() <b>must</b> be called from a scheduled task;
+     * see {@link org.bukkit.event.inventory.InventoryClickEvent} for more
+     * information.
      *
      * @param menuClick encapsulation which provides data about the click event
      */
     static void close(MenuClick menuClick) {
-        menuClick.player.closeInventory();
+        // closeInventory must not be called from InventoryClickEvent handler
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                // task called on next tick
+                menuClick.player.closeInventory();
+            }
+        }.runTask(JavaPlugin.getProvidingPlugin(ClickAction.class));
     }
 }
