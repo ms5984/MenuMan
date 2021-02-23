@@ -59,7 +59,7 @@ class MyMenuClass {
         <dependency>
             <groupId>com.github.ms5984.lib</groupId>
             <artifactId>menu-man</artifactId>
-            <version>1.0.3-SNAPSHOT</version>
+            <version>1.1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
