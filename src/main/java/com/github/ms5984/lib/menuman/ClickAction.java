@@ -18,8 +18,10 @@
  */
 package com.github.ms5984.lib.menuman;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Functional interface which defines behavior on use of a Menu's actions.
@@ -51,5 +53,44 @@ public interface ClickAction {
                 menuClick.player.closeInventory();
             }
         }.runTask(JavaPlugin.getProvidingPlugin(ClickAction.class));
+    }
+
+    /**
+     * Easily run a command, optionally closing the inventory afterward.
+     * <p>
+     * See {@link RunCommand#closeOnClick()}.
+     */
+    abstract class RunCommand implements ClickAction {
+
+        /**
+         * Dispatches the command specified for the player who clicked.
+         * <p>
+         * If {@link #closeOnClick()} returns true, the menu will be closed.
+         *
+         * @param menuClick encapsulation which provides data about the click event
+         */
+        @Override
+        public void onClick(MenuClick menuClick) {
+            Bukkit.dispatchCommand(menuClick.player, commandToRun());
+            if (closeOnClick()) close(menuClick);
+        }
+
+        /**
+         * Specify the command to run. The command should be prefixed with "/".
+         *
+         * @return command string that will be dispatched on clicking
+         */
+        public abstract @NotNull String commandToRun();
+
+        /**
+         * Configure the menu to close or not after command dispatch.
+         * <p>
+         * Defaults to true.
+         *
+         * @return if the menu will close after the command is executed
+         */
+        public boolean closeOnClick() {
+            return true;
+        }
     }
 }
