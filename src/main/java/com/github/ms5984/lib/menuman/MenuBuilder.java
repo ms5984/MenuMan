@@ -41,6 +41,14 @@ public final class MenuBuilder {
      */
     protected final Map<Integer, ClickAction> actions = new HashMap<>();
     /**
+     * Describes filler object.
+     */
+    protected MenuElement fillerItem;
+    /**
+     * Callback to run on filler click.
+     */
+    protected ClickAction fillerAction;
+    /**
      * Callback to run on menu close. Defaults to null.
      */
     protected CloseAction closeAction;
@@ -175,7 +183,7 @@ public final class MenuBuilder {
     }
 
     /**
-     * Add a previously styled ItemStack directly to the menu.
+     * Add a previously-styled ItemStack directly to the menu.
      * <p>
      * This is useful if you're used to managing your own
      * custom items. Your item will not be altered.
@@ -200,6 +208,29 @@ public final class MenuBuilder {
      */
     public ElementBuilder addElement(ItemStack item, String text, String... lore) {
         return new ElementBuilder(this, new MenuElement(item, text, lore));
+    }
+
+    /**
+     * Fill the remaining slots of the menu with an ItemStack.
+     *
+     * @param item item to add
+     * @return a new ElementBuilder to customize the element
+     */
+    public FillerBuilder setFiller(ItemStack item) {
+        return new FillerBuilder(this, new MenuElement(item));
+    }
+
+    /**
+     * Fill the remaining slots of the menu with an ItemStack
+     * of specified display name and lore.
+     *
+     * @param item item to add
+     * @param text display name of item
+     * @param lore optional lore to add as varargs
+     * @return a new ElementBuilder to customize the element
+     */
+    public FillerBuilder setFiller(ItemStack item, String text, String... lore) {
+        return new FillerBuilder(this, new MenuElement(item, text, lore));
     }
 
     /**

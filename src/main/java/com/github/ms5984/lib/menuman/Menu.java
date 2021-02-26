@@ -84,6 +84,20 @@ public final class Menu {
         this.closeAction = menuBuilder.closeAction;
         this.contents = new HashMap<>(numberOfRows.slotCount);
         menuBuilder.items.forEach((index, element) -> contents.put(index, element.generateComplete()));
+        final ItemStack fillerItem = Optional
+                .ofNullable(menuBuilder.fillerItem)
+                .map(MenuElement::generateComplete)
+                .orElse(null);
+        if (fillerItem != null) {
+            for (int i = 0; i < numberOfRows.slotCount; ++i) {
+                contents.putIfAbsent(i, fillerItem);
+            }
+        }
+        if (menuBuilder.fillerAction != null) {
+            for (int i = 0; i < numberOfRows.slotCount; ++i) {
+                actions.putIfAbsent(i, menuBuilder.fillerAction);
+            }
+        }
         Bukkit.getPluginManager().registerEvents(new ClickListener(), plugin);
     }
 
