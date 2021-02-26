@@ -76,13 +76,13 @@ public final class Menu {
         this.plugin = javaPlugin;
         this.numberOfRows = menuBuilder.numberOfRows;
         this.title = menuBuilder.title;
-        this.initialContents = menuBuilder.initialContents;
+        this.initialContents = menuBuilder.initialContents.clone();
         this.cancelClickLower = menuBuilder.cancelLowerInvClick;
         this.allowPickupFromMenu = menuBuilder.allowItemPickup;
         this.allowShiftClickLower = menuBuilder.allowLowerInvShiftClick;
-        this.actions = menuBuilder.actions;
+        this.actions = new HashMap<>(menuBuilder.actions);
         this.closeAction = menuBuilder.closeAction;
-        contents = new HashMap<>(numberOfRows.slotCount);
+        this.contents = new HashMap<>(numberOfRows.slotCount);
         menuBuilder.items.forEach((index, element) -> contents.put(index, element.generateComplete()));
         Bukkit.getPluginManager().registerEvents(new ClickListener(), plugin);
     }
