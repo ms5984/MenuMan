@@ -1,7 +1,6 @@
 ## Welcome to MenuMan
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.ms5984.lib/menu-man)](https://oss.sonatype.org/#nexus-search;gav~com.github.ms5984.lib~menu-man~~~)
 [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/com.github.ms5984.lib/menu-man?server=https%3A%2F%2Foss.sonatype.org)](https://oss.sonatype.org/#nexus-search;gav~com.github.ms5984.lib~menu-man~~~)
-[![GitHub tag (latest pre-release)](https://img.shields.io/github/v/tag/ms5984/MenuMan?include_prereleases)](https://github.com/ms5984/MenuMan/releases)
 
 ### Implementation
 Create a new MenuBuilder object and follow the fluent interface where it takes you.
