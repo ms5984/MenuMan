@@ -175,7 +175,7 @@ public final class MenuBuilder {
     }
 
     /**
-     * Add a previously styled ItemStack directly to the menu.
+     * Add a previously-styled ItemStack directly to the menu.
      * <p>
      * This is useful if you're used to managing your own
      * custom items. Your item will not be altered.
