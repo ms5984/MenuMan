@@ -5,13 +5,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
@@ -20,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@RunWith(MockitoJUnitRunner.class)
 public class MenuClickTest {
 
     @Mock(name = "player")
@@ -38,13 +35,13 @@ public class MenuClickTest {
     @Mock
     ItemStack cursor;
 
-    @Before
+    @BeforeEach
     public void initMocks() {
-        when(e.getView()).thenReturn(view);
-        when(e.getClick()).thenReturn(testClick);
-        when(e.getSlot()).thenReturn(testSlot);
-        doReturn(inventory).when(e).getClickedInventory();
-        doReturn(cursor, cursor, null).when(e).getCursor();
+        lenient().when(e.getView()).thenReturn(view);
+        lenient().when(e.getClick()).thenReturn(testClick);
+        lenient().when(e.getSlot()).thenReturn(testSlot);
+        lenient().doReturn(inventory).when(e).getClickedInventory();
+        lenient().doReturn(cursor, cursor, null).when(e).getCursor();
     }
 
     @Test

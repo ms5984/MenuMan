@@ -3,20 +3,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
 
 @ExtendWith(MockitoExtension.class)
-@RunWith(MockitoJUnitRunner.class)
 public class MenuCloseTest {
 
     @Mock(name = "player")
@@ -30,26 +26,22 @@ public class MenuCloseTest {
     @Mock
     InventoryView view;
 
-    @Before
-    public void initMocks() {
-        doReturn(player).when(e).getPlayer();
-        doReturn(inventory).when(e).getInventory();
-        //noinspection ResultOfMethodCallIgnored
-        doReturn(view).when(e).getView();
-    }
-
     @Test
     public void testGetPlayer() {
+        doReturn(player).when(e).getPlayer();
         assertSame(e.getPlayer(), menuClose.getPlayer());
     }
 
     @Test
     public void testGetUpperInventory() {
+        doReturn(inventory).when(e).getInventory();
         assertSame(e.getInventory(), menuClose.getUpperInventory());
     }
 
     @Test
     public void testGetInventoryView() {
+        //noinspection ResultOfMethodCallIgnored
+        doReturn(view).when(e).getView();
         assertSame(e.getView(), menuClose.getInventoryView());
     }
 }

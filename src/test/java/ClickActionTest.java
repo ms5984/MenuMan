@@ -1,13 +1,10 @@
 import com.github.ms5984.lib.menuman.ClickAction;
 import com.github.ms5984.lib.menuman.MenuClick;
 import org.jetbrains.annotations.NotNull;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Spy;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +12,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@RunWith(MockitoJUnitRunner.class)
 public class ClickActionTest {
 
     @Mock
@@ -41,11 +37,6 @@ public class ClickActionTest {
         }
     };
 
-    @Before
-    public void initSpy() {
-        doNothing().when(runCommand).onClick(any());
-    }
-
     @Test
     public void testOnClick() {
         clickAction.onClick(menuClick);
@@ -53,6 +44,7 @@ public class ClickActionTest {
 
     @Test
     public void testRunCommandOnClick() {
+        doNothing().when(runCommand).onClick(any());
         runCommand.onClick(menuClick);
         verify(runCommand).onClick(menuClick);
     }
