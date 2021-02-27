@@ -56,7 +56,7 @@ public interface ClickAction {
     }
 
     /**
-     * Easily run a command, optionally closing the inventory afterward.
+     * Easily run a command, closing the menu afterward by default.
      * <p>
      * See {@link RunCommand#closeOnClick()}.
      */
