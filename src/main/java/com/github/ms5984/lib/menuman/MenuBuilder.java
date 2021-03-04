@@ -97,9 +97,7 @@ public final class MenuBuilder {
     public MenuBuilder(Menu.InventoryRows rows, String title, ItemStack[] initialContents) {
         this.numberOfRows = rows;
         this.title = title;
-        if (initialContents.length > rows.slotCount)
-            throw new IllegalArgumentException("Initial contents larger than inventory slots!");
-        this.initialContents = initialContents;
+        setInitialContents(initialContents);
     }
 
     /**
@@ -134,9 +132,17 @@ public final class MenuBuilder {
      *
      * @param contents an array of items
      * @return this MenuBuilder
+     * @throws IllegalArgumentException if initialContents.length &gt; slots
      */
+    @SuppressWarnings("UnusedReturnValue")
     public MenuBuilder setInitialContents(ItemStack[] contents) {
-        this.initialContents = contents;
+        if (contents != null) {
+            if (contents.length > numberOfRows.slotCount)
+                throw new IllegalArgumentException("Initial contents larger than inventory slots!");
+            this.initialContents = contents;
+        } else {
+            this.initialContents = null;
+        }
         return this;
     }
 

@@ -76,7 +76,11 @@ public final class Menu {
         this.plugin = javaPlugin;
         this.numberOfRows = menuBuilder.numberOfRows;
         this.title = menuBuilder.title;
-        this.initialContents = menuBuilder.initialContents.clone();
+        if (menuBuilder.initialContents == null) {
+            this.initialContents = null;
+        } else {
+            this.initialContents = menuBuilder.initialContents;
+        }
         this.cancelClickLower = menuBuilder.cancelLowerInvClick;
         this.allowPickupFromMenu = menuBuilder.allowItemPickup;
         this.allowShiftClickLower = menuBuilder.allowLowerInvShiftClick;
