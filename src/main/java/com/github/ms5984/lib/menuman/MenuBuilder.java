@@ -20,6 +20,7 @@ package com.github.ms5984.lib.menuman;
 
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -81,7 +82,7 @@ public final class MenuBuilder {
      * @param rows number of rows in final Inventory
      * @param title Title of generated inventory
      */
-    public MenuBuilder(Menu.InventoryRows rows, String title) {
+    public MenuBuilder(@NotNull Menu.InventoryRows rows, String title) {
         this.numberOfRows = rows;
         this.title = title;
     }
@@ -94,7 +95,7 @@ public final class MenuBuilder {
      * @param initialContents an array of items to prefill the menu with
      * @throws IllegalArgumentException if initialContents.length &gt; slots
      */
-    public MenuBuilder(Menu.InventoryRows rows, String title, ItemStack[] initialContents) {
+    public MenuBuilder(@NotNull Menu.InventoryRows rows, String title, ItemStack[] initialContents) {
         this.numberOfRows = rows;
         this.title = title;
         setInitialContents(initialContents);
@@ -115,8 +116,11 @@ public final class MenuBuilder {
 
     /**
      * Set a new title for the menu.
+     * <p>
+     * If set to null, menu uses a simple, generated
+     * title of the format "Menu#&lt;integer&gt;".
      *
-     * @param title a new title for the generate menu
+     * @param title a new title for the generated menu
      * @return this MenuBuilder
      */
     public MenuBuilder setTitle(String title) {
