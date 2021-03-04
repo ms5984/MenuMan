@@ -75,12 +75,8 @@ public final class Menu {
     protected Menu(MenuBuilder menuBuilder, JavaPlugin javaPlugin) {
         this.plugin = javaPlugin;
         this.numberOfRows = menuBuilder.numberOfRows;
-        this.title = menuBuilder.title;
-        if (menuBuilder.initialContents == null) {
-            this.initialContents = null;
-        } else {
-            this.initialContents = menuBuilder.initialContents;
-        }
+        this.title = (menuBuilder.title != null) ? menuBuilder.title : "Menu#"+hashCode();
+        this.initialContents = (menuBuilder.initialContents == null) ? null : menuBuilder.initialContents;
         this.cancelClickLower = menuBuilder.cancelLowerInvClick;
         this.allowPickupFromMenu = menuBuilder.allowItemPickup;
         this.allowShiftClickLower = menuBuilder.allowLowerInvShiftClick;
