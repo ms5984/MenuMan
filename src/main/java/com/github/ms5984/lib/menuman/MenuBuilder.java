@@ -129,6 +129,8 @@ public final class MenuBuilder {
      * <p>
      * This happens after creation of the inventory but before
      * menu elements are processed.
+     * <p>
+     * Set to an empty array or null to clear.
      *
      * @param contents an array of items
      * @return this MenuBuilder
