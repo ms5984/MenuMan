@@ -1,5 +1,5 @@
-import com.github.ms5984.lib.menuman.CloseAction;
-import com.github.ms5984.lib.menuman.MenuClose;
+package com.github.ms5984.lib.menuman;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

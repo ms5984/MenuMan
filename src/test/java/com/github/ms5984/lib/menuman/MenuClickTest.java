@@ -1,4 +1,5 @@
-import com.github.ms5984.lib.menuman.MenuClick;
+package com.github.ms5984.lib.menuman;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;

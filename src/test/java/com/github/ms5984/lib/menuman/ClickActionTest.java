@@ -1,5 +1,5 @@
-import com.github.ms5984.lib.menuman.ClickAction;
-import com.github.ms5984.lib.menuman.MenuClick;
+package com.github.ms5984.lib.menuman;
+
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

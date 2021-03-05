@@ -1,4 +1,5 @@
-import com.github.ms5984.lib.menuman.MenuClose;
+package com.github.ms5984.lib.menuman;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
@@ -40,7 +41,6 @@ public class MenuCloseTest {
 
     @Test
     public void testGetInventoryView() {
-        //noinspection ResultOfMethodCallIgnored
         doReturn(view).when(e).getView();
         assertSame(e.getView(), menuClose.getInventoryView());
     }
