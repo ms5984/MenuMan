@@ -18,7 +18,6 @@
  */
 package com.github.ms5984.lib.menuman;
 
-import lombok.val;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -85,9 +84,8 @@ public final class MenuClick {
      * @return an Optional of the clicked InventorySlot
      */
     public Optional<InventorySlot> getSlotClicked() {
-        val clickedInventory = inventoryClickEvent.getClickedInventory();
-        if (clickedInventory == null) return Optional.empty();
-        return Optional.of(new InventorySlot(clickedInventory, inventoryClickEvent.getSlot()));
+        return Optional.ofNullable(inventoryClickEvent.getClickedInventory())
+                .map(inv -> new InventorySlot(inv, inventoryClickEvent.getSlot()));
     }
 
     /**
