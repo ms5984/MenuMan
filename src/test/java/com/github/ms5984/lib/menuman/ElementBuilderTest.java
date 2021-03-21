@@ -35,8 +35,6 @@ public class ElementBuilderTest {
         assertSame(newItem, menuBuilder.items.get(0).baseItem);
     }
 
-    // TODO: revise vararg processing
-    @Disabled
     @Test
     public void testSetLore() {
         // test default
@@ -65,8 +63,8 @@ public class ElementBuilderTest {
 
     @Test
     public void testAddLore() {
-        // test error TODO: Fix this
-        assertThrows(NullPointerException.class, () -> getSimpleBuilder().addLore("test"));
+        // test simple add
+        assertDoesNotThrow(() -> getSimpleBuilder().addLore("test"));
         // test set then add
         final MenuBuilder menuBuilder = getSimpleBuilder().setLore("Test").addLore("test2").assignToSlots(0);
         assertEquals("Test", menuBuilder.items.get(0).lore.get(0));
