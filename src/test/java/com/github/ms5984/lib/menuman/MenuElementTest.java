@@ -10,8 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 @ExtendWith(MockitoExtension.class)
 public class MenuElementTest {
-    final Material MATERIAL = Material.DIRT;
-    final ItemStack itemStack = new ItemStack(MATERIAL);
+    final ItemStack itemStack = new ItemStack(Material.DIRT);
 
     @Test
     public void testMenuElementGenerateCompleteWithNullValues() {

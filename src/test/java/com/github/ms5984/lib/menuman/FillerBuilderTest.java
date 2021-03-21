@@ -10,22 +10,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class FillerBuilderTest {
-    final Menu.InventoryRows ROWS = Menu.InventoryRows.THREE;
-    final String TITLE = "Test title";
     @Mock
-    ItemStack FAKE_ITEM;
+    ItemStack fakeItem;
     @Mock
-    ItemStack DISPLACEMENT_ITEM;
-    final int DISPLACEMENT_ITEM_SLOT = 13;
+    ItemStack displacementItem;
+    final int displacementItemSlot = 13;
 
     @Test
     public void simpleConstructor() {
         getSimpleFillerBuilder().set().items.forEach((index, element) -> {
-            if (index == DISPLACEMENT_ITEM_SLOT) {
-                assertNotSame(FAKE_ITEM, element.baseItem);
+            if (index == displacementItemSlot) {
+                assertNotSame(fakeItem, element.baseItem);
                 return;
             }
-            assertSame(FAKE_ITEM, element.baseItem);
+            assertSame(fakeItem, element.baseItem);
         });
     }
 
@@ -33,7 +31,7 @@ public class FillerBuilderTest {
     public void setAction() {
         final ClickAction clickAction = click -> {};
         getSimpleFillerBuilder().setAction(clickAction).set().actions.forEach((index, action) -> {
-            if (index == DISPLACEMENT_ITEM_SLOT) {
+            if (index == displacementItemSlot) {
                 assertNotSame(clickAction, action);
                 return;
             }
@@ -44,7 +42,7 @@ public class FillerBuilderTest {
     @Test
     public void setItem(@Mock ItemStack newItem) {
         getSimpleFillerBuilder().setItem(newItem).set().items.forEach((index, menuElement) -> {
-            if (index == DISPLACEMENT_ITEM_SLOT) {
+            if (index == displacementItemSlot) {
                 assertNotSame(newItem, menuElement.baseItem);
                 return;
             }
@@ -61,7 +59,7 @@ public class FillerBuilderTest {
         // test empty
         final MenuBuilder menuBuilder = getSimpleFillerBuilder().setLore().set();
         menuBuilder.items.forEach((index, element) -> {
-            if (index == DISPLACEMENT_ITEM_SLOT) {
+            if (index == displacementItemSlot) {
                 assertThrows(NullPointerException.class, () -> element.lore.isEmpty());
                 return;
             }
@@ -70,7 +68,7 @@ public class FillerBuilderTest {
         // test one line
         final MenuBuilder menuBuilder1 = getSimpleFillerBuilder().setLore("line1").set();
         menuBuilder1.items.forEach((index, element) -> {
-            if (index == DISPLACEMENT_ITEM_SLOT) {
+            if (index == displacementItemSlot) {
                 assertThrows(NullPointerException.class, () -> element.lore.contains("line1"));
                 return;
             }
@@ -79,7 +77,7 @@ public class FillerBuilderTest {
         // test two lines
         final MenuBuilder menuBuilder2 = getSimpleFillerBuilder().setLore("line1", "line2").set();
         menuBuilder2.items.forEach((index, element) -> {
-            if (index == DISPLACEMENT_ITEM_SLOT) {
+            if (index == displacementItemSlot) {
                 assertThrows(NullPointerException.class, () -> element.lore.contains("line1"));
                 assertThrows(NullPointerException.class, () -> element.lore.contains("line2"));
                 return;
@@ -91,7 +89,7 @@ public class FillerBuilderTest {
         final String[] lore = {"arr1"};
         final MenuBuilder menuBuilder3 = getSimpleFillerBuilder().setLore(lore).set();
         menuBuilder3.items.forEach((index, element) -> {
-            if (index == DISPLACEMENT_ITEM_SLOT) {
+            if (index == displacementItemSlot) {
                 assertThrows(NullPointerException.class, () -> element.lore.contains("arr1"));
                 return;
             }
@@ -101,7 +99,7 @@ public class FillerBuilderTest {
         final String[] lore1 = {"arr1", "arr2"};
         final MenuBuilder menuBuilder4 = getSimpleFillerBuilder().setLore(lore1).set();
         menuBuilder4.items.forEach((index, element) -> {
-            if (index == DISPLACEMENT_ITEM_SLOT) {
+            if (index == displacementItemSlot) {
                 assertThrows(NullPointerException.class, () -> element.lore.contains("arr1"));
                 assertThrows(NullPointerException.class, () -> element.lore.contains("arr2"));
                 return;
@@ -117,7 +115,7 @@ public class FillerBuilderTest {
         assertDoesNotThrow(() -> getSimpleFillerBuilder().addLore("test"));
         // test set then add
         getSimpleFillerBuilder().setLore("Test").addLore("test2").set().items.forEach((index, element) -> {
-            if (index == DISPLACEMENT_ITEM_SLOT) {
+            if (index == displacementItemSlot) {
                 assertNull(element.lore);
                 return;
             }
@@ -127,8 +125,8 @@ public class FillerBuilderTest {
     }
 
     FillerBuilder getSimpleFillerBuilder() {
-        return new MenuBuilder(ROWS, TITLE)
-                .addElement(DISPLACEMENT_ITEM).assignToSlots(DISPLACEMENT_ITEM_SLOT)
-                .setFiller(FAKE_ITEM);
+        return new MenuBuilder(Menu.InventoryRows.THREE, "Test title")
+                .addElement(displacementItem).assignToSlots(displacementItemSlot)
+                .setFiller(fakeItem);
     }
 }

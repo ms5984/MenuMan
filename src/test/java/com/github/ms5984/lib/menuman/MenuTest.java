@@ -23,15 +23,12 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class MenuTest {
-    final Menu.InventoryRows ROWS = Menu.InventoryRows.THREE;
-    final String TITLE = "Test title";
-    final MenuBuilder MENU_BUILDER = new MenuBuilder(ROWS, TITLE);
     @Spy
     final Menu menu;
     @Mock
-    final ItemStack ITEM1 = mock(ItemStack.class, RETURNS_DEEP_STUBS);
+    final ItemStack item1 = mock(ItemStack.class, RETURNS_DEEP_STUBS);
     @Mock
-    final ItemStack ITEM2 = mock(ItemStack.class, RETURNS_DEEP_STUBS);
+    final ItemStack item2 = mock(ItemStack.class, RETURNS_DEEP_STUBS);
     final int[] slots1 = {0, 11, 22};
     final int[] slots2 = {3, 10, 19};
     final ClickAction action1 = click -> {};
@@ -39,9 +36,10 @@ public class MenuTest {
 
     MenuTest(@Mock JavaPlugin plugin) {
         // setup Menu
-        MENU_BUILDER.addElement(ITEM1).setAction(action1).assignToSlots(slots1);
-        MENU_BUILDER.addElement(ITEM2).setAction(action2).assignToSlots(slots2);
-        menu = spy(MENU_BUILDER.create(plugin));
+        final MenuBuilder menuBuilder = new MenuBuilder(Menu.InventoryRows.THREE, "Test title");
+        menuBuilder.addElement(item1).setAction(action1).assignToSlots(slots1);
+        menuBuilder.addElement(item2).setAction(action2).assignToSlots(slots2);
+        menu = spy(menuBuilder.create(plugin));
     }
 
     @Test

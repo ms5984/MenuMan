@@ -10,15 +10,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ElementBuilderTest {
-    final Menu.InventoryRows ROWS = Menu.InventoryRows.THREE;
-    final String TITLE = "Test title";
+    final Menu.InventoryRows rows = Menu.InventoryRows.THREE;
     @Mock
-    ItemStack FAKE_ITEM;
+    ItemStack fakeItem;
 
     @Test
     public void testSimpleConstructor() {
         final MenuBuilder menuBuilder = getSimpleBuilder().assignToSlots(0);
-        assertSame(FAKE_ITEM, menuBuilder.items.get(0).baseItem);
+        assertSame(fakeItem, menuBuilder.items.get(0).baseItem);
     }
 
     @Test
@@ -78,16 +77,16 @@ public class ElementBuilderTest {
         // test null throws
         assertThrows(NullPointerException.class, () -> getSimpleBuilder().assignToSlots(null));
         // test one slot
-        assertEquals(FAKE_ITEM, getSimpleBuilder().assignToSlots(0).items.get(0).baseItem);
+        assertEquals(fakeItem, getSimpleBuilder().assignToSlots(0).items.get(0).baseItem);
         // test a few slots
         final MenuBuilder menuBuilder = getSimpleBuilder().assignToSlots(3, 7);
-        assertEquals(FAKE_ITEM, menuBuilder.items.get(3).baseItem);
-        assertEquals(FAKE_ITEM, menuBuilder.items.get(7).baseItem);
+        assertEquals(fakeItem, menuBuilder.items.get(3).baseItem);
+        assertEquals(fakeItem, menuBuilder.items.get(7).baseItem);
         // test out of range
-        assertThrows(IllegalArgumentException.class, () -> getSimpleBuilder().assignToSlots(ROWS.slotCount));
+        assertThrows(IllegalArgumentException.class, () -> getSimpleBuilder().assignToSlots(rows.slotCount));
     }
 
     ElementBuilder getSimpleBuilder() {
-        return new MenuBuilder(ROWS, TITLE).addElement(FAKE_ITEM);
+        return new MenuBuilder(rows, "Test title").addElement(fakeItem);
     }
 }
