@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.lang.reflect.Field;
 import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -75,7 +76,13 @@ public class MenuTest {
         // add logger
         doReturn(Logger.getLogger("Test")).when(server).getLogger();
         // setup fake server
-        Bukkit.setServer(server);
+        try {
+            final Field serverField = Bukkit.class.getDeclaredField("server");
+            serverField.setAccessible(true);
+            serverField.set(null, server);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+//            e.printStackTrace();
+        }
         // setup Menu
         MENU_BUILDER.addElement(ITEM1).setAction(action1).assignToSlots(slots1);
         MENU_BUILDER.addElement(ITEM2).setAction(action2).assignToSlots(slots2);
