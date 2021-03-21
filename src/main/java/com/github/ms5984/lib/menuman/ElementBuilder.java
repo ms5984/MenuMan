@@ -83,6 +83,10 @@ public final class ElementBuilder {
      * @return this builder
      */
     public ElementBuilder setLore(String... lore) {
+        if (lore == null) {
+            this.menuElement.lore = null;
+            return this;
+        }
         this.menuElement.lore = new ArrayList<>(Arrays.asList(lore));
         return this;
     }
@@ -94,6 +98,7 @@ public final class ElementBuilder {
      * @return this builder
      */
     public ElementBuilder addLore(@NotNull String line) {
+        if (this.menuElement.lore == null) this.menuElement.lore = new ArrayList<>();
         this.menuElement.lore.add(line);
         return this;
     }

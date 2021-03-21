@@ -85,6 +85,10 @@ public final class FillerBuilder {
      * @return this builder
      */
     public FillerBuilder setLore(String... lore) {
+        if (lore == null) {
+            this.menuElement.lore = null;
+            return this;
+        }
         this.menuElement.lore = new ArrayList<>(Arrays.asList(lore));
         return this;
     }
@@ -96,6 +100,7 @@ public final class FillerBuilder {
      * @return this builder
      */
     public FillerBuilder addLore(@NotNull String line) {
+        if (this.menuElement.lore == null) this.menuElement.lore = new ArrayList<>();
         this.menuElement.lore.add(line);
         return this;
     }
