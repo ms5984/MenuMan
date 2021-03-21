@@ -1,7 +1,6 @@
 package com.github.ms5984.lib.menuman;
 
 import org.bukkit.inventory.ItemStack;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -11,10 +10,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ElementBuilderTest {
-    static final Menu.InventoryRows ROWS = Menu.InventoryRows.THREE;
-    static final String TITLE = "Test title";
+    final Menu.InventoryRows ROWS = Menu.InventoryRows.THREE;
+    final String TITLE = "Test title";
     @Mock
-    static ItemStack FAKE_ITEM;
+    ItemStack FAKE_ITEM;
 
     @Test
     public void testSimpleConstructor() {
@@ -88,7 +87,7 @@ public class ElementBuilderTest {
         assertThrows(IllegalArgumentException.class, () -> getSimpleBuilder().assignToSlots(ROWS.slotCount));
     }
 
-    static ElementBuilder getSimpleBuilder() {
+    ElementBuilder getSimpleBuilder() {
         return new MenuBuilder(ROWS, TITLE).addElement(FAKE_ITEM);
     }
 }

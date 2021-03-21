@@ -23,19 +23,26 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class MenuTest {
-    static final Menu.InventoryRows ROWS = Menu.InventoryRows.THREE;
-    static final String TITLE = "Test title";
-    static final MenuBuilder MENU_BUILDER = new MenuBuilder(ROWS, TITLE);
+    final Menu.InventoryRows ROWS = Menu.InventoryRows.THREE;
+    final String TITLE = "Test title";
+    final MenuBuilder MENU_BUILDER = new MenuBuilder(ROWS, TITLE);
     @Spy
-    static Menu menu;
+    final Menu menu;
     @Mock
-    static ItemStack ITEM1 = mock(ItemStack.class, RETURNS_DEEP_STUBS);
+    final ItemStack ITEM1 = mock(ItemStack.class, RETURNS_DEEP_STUBS);
     @Mock
-    static ItemStack ITEM2 = mock(ItemStack.class, RETURNS_DEEP_STUBS);
-    static int[] slots1 = {0, 11, 22};
-    static int[] slots2 = {3, 10, 19};
-    static final ClickAction action1 = click -> {};
-    static final ClickAction action2 = MenuClick::allowClick;
+    final ItemStack ITEM2 = mock(ItemStack.class, RETURNS_DEEP_STUBS);
+    final int[] slots1 = {0, 11, 22};
+    final int[] slots2 = {3, 10, 19};
+    final ClickAction action1 = click -> {};
+    final ClickAction action2 = MenuClick::allowClick;
+
+    MenuTest(@Mock JavaPlugin plugin) {
+        // setup Menu
+        MENU_BUILDER.addElement(ITEM1).setAction(action1).assignToSlots(slots1);
+        MENU_BUILDER.addElement(ITEM2).setAction(action2).assignToSlots(slots2);
+        menu = spy(MENU_BUILDER.create(plugin));
+    }
 
     @Test
     public void testGetInventory(@Mock Player player) {
@@ -65,7 +72,6 @@ public class MenuTest {
     @BeforeAll
     public static void setupFakeServerAndMenu(@Mock Server server,
                                               @Mock PluginManager pluginManager,
-                                              @Mock JavaPlugin plugin,
                                               @Mock Inventory inventory) {
         // fake name, version, bukkitVersion
         doReturn("FakeServerTest").when(server).getName();
@@ -83,10 +89,6 @@ public class MenuTest {
         } catch (NoSuchFieldException | IllegalAccessException e) {
 //            e.printStackTrace();
         }
-        // setup Menu
-        MENU_BUILDER.addElement(ITEM1).setAction(action1).assignToSlots(slots1);
-        MENU_BUILDER.addElement(ITEM2).setAction(action2).assignToSlots(slots2);
-        menu = spy(MENU_BUILDER.create(plugin));
         // fake createInventory
         doAnswer(invocationOnMock -> inventory).when(server).createInventory(isNull(), anyInt(), anyString());
     }

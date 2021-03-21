@@ -10,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class FillerBuilderTest {
-    static final Menu.InventoryRows ROWS = Menu.InventoryRows.THREE;
-    static final String TITLE = "Test title";
+    final Menu.InventoryRows ROWS = Menu.InventoryRows.THREE;
+    final String TITLE = "Test title";
     @Mock
-    static ItemStack FAKE_ITEM;
+    ItemStack FAKE_ITEM;
     @Mock
-    static ItemStack DISPLACEMENT_ITEM;
-    static final int DISPLACEMENT_ITEM_SLOT = 13;
+    ItemStack DISPLACEMENT_ITEM;
+    final int DISPLACEMENT_ITEM_SLOT = 13;
 
     @Test
     public void simpleConstructor() {
@@ -126,7 +126,7 @@ public class FillerBuilderTest {
         });
     }
 
-    static FillerBuilder getSimpleFillerBuilder() {
+    FillerBuilder getSimpleFillerBuilder() {
         return new MenuBuilder(ROWS, TITLE)
                 .addElement(DISPLACEMENT_ITEM).assignToSlots(DISPLACEMENT_ITEM_SLOT)
                 .setFiller(FAKE_ITEM);

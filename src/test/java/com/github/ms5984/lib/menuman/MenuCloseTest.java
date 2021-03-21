@@ -39,6 +39,7 @@ public class MenuCloseTest {
         assertSame(e.getInventory(), menuClose.getUpperInventory());
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Test
     public void testGetInventoryView() {
         doReturn(view).when(e).getView();
