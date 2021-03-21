@@ -9,32 +9,32 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ElementBuilderTest {
+class ElementBuilderTest {
     final Menu.InventoryRows rows = Menu.InventoryRows.THREE;
     @Mock
     ItemStack fakeItem;
 
     @Test
-    public void testSimpleConstructor() {
+    void testSimpleConstructor() {
         final MenuBuilder menuBuilder = getSimpleBuilder().assignToSlots(0);
         assertSame(fakeItem, menuBuilder.items.get(0).baseItem);
     }
 
     @Test
-    public void testSetAction() {
+    void testSetAction() {
         final ClickAction clickAction = click -> {};
         final MenuBuilder menuBuilder = getSimpleBuilder().setAction(clickAction).assignToSlots(0);
         assertSame(clickAction, menuBuilder.actions.get(0));
     }
 
     @Test
-    public void testSetItem(@Mock ItemStack newItem) {
+    void testSetItem(@Mock ItemStack newItem) {
         final MenuBuilder menuBuilder = getSimpleBuilder().setItem(newItem).assignToSlots(0);
         assertSame(newItem, menuBuilder.items.get(0).baseItem);
     }
 
     @Test
-    public void testSetLore() {
+    void testSetLore() {
         // test default
         final MenuBuilder plain = getSimpleBuilder().assignToSlots(0);
         assertNull(plain.items.get(0).lore);
@@ -60,7 +60,7 @@ public class ElementBuilderTest {
     }
 
     @Test
-    public void testAddLore() {
+    void testAddLore() {
         // test simple add
         assertDoesNotThrow(() -> getSimpleBuilder().addLore("test"));
         // test set then add
@@ -71,11 +71,12 @@ public class ElementBuilderTest {
 
     @SuppressWarnings("ConfusingArgumentToVarargsMethod")
     @Test
-    public void testAssignToSlots() {
+    void testAssignToSlots() {
         // test empty
         assertTrue(getSimpleBuilder().assignToSlots().items.isEmpty());
         // test null throws
-        assertThrows(NullPointerException.class, () -> getSimpleBuilder().assignToSlots(null));
+        final ElementBuilder simpleBuilder = getSimpleBuilder();
+        assertThrows(NullPointerException.class, () -> simpleBuilder.assignToSlots(null));
         // test one slot
         assertEquals(fakeItem, getSimpleBuilder().assignToSlots(0).items.get(0).baseItem);
         // test a few slots
@@ -83,7 +84,8 @@ public class ElementBuilderTest {
         assertEquals(fakeItem, menuBuilder.items.get(3).baseItem);
         assertEquals(fakeItem, menuBuilder.items.get(7).baseItem);
         // test out of range
-        assertThrows(IllegalArgumentException.class, () -> getSimpleBuilder().assignToSlots(rows.slotCount));
+        final ElementBuilder simpleBuilder1 = getSimpleBuilder();
+        assertThrows(IllegalArgumentException.class, () -> simpleBuilder1.assignToSlots(rows.slotCount));
     }
 
     ElementBuilder getSimpleBuilder() {

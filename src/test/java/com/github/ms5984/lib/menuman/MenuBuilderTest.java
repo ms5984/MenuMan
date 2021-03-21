@@ -21,7 +21,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-public class MenuBuilderTest {
+class MenuBuilderTest {
 
     final Menu.InventoryRows rows = Menu.InventoryRows.THREE;
     final String title = "Test title";
@@ -31,7 +31,7 @@ public class MenuBuilderTest {
     final MenuBuilder menuBuilderWithContents = new MenuBuilder(rows, title, initialStacks);
 
     @Test
-    public void testSetCloseAction(@Mock CloseAction mock) {
+    void testSetCloseAction(@Mock CloseAction mock) {
         // test simple set
         menuBuilder.setCloseAction(mock);
         assertSame(mock, menuBuilder.closeAction);
@@ -41,7 +41,7 @@ public class MenuBuilderTest {
     }
 
     @Test
-    public void testSetTitle() {
+    void testSetTitle() {
         // test null
         menuBuilder.setTitle(null);
         assertNull(menuBuilder.title);
@@ -51,7 +51,7 @@ public class MenuBuilderTest {
     }
 
     @Test
-    public void testSetInitialContents() {
+    void testSetInitialContents() {
         // test throw on too big array
         assertThrows(IllegalArgumentException.class, () -> menuBuilder.setInitialContents(new ItemStack[45]));
         // test assignment to null
@@ -63,7 +63,7 @@ public class MenuBuilderTest {
     }
 
     @Test
-    public void testDefaultClickBehavior() {
+    void testDefaultClickBehavior() {
         // test initial state
         assertFalse(menuBuilder.allowItemPickup);
         // set to true
@@ -75,7 +75,7 @@ public class MenuBuilderTest {
     }
 
     @Test
-    public void testCancelLowerInventoryClicks() {
+    void testCancelLowerInventoryClicks() {
         // test initial state
         assertFalse(menuBuilder.cancelLowerInvClick);
         // set to true
@@ -87,7 +87,7 @@ public class MenuBuilderTest {
     }
 
     @Test
-    public void testAllowLowerShiftClicks() {
+    void testAllowLowerShiftClicks() {
         // test initial state
         assertFalse(menuBuilder.allowLowerInvShiftClick);
         // set to true
@@ -99,7 +99,7 @@ public class MenuBuilderTest {
     }
 
     @Test
-    public void testAddElement(@Mock ItemStack itemStack, @Mock ClickAction clickAction) {
+    void testAddElement(@Mock ItemStack itemStack, @Mock ClickAction clickAction) {
         // create temporary builder
         final MenuBuilder temp = new MenuBuilder(rows, title);
         final ElementBuilder elementBuilder = temp.addElement(itemStack);
@@ -118,7 +118,7 @@ public class MenuBuilderTest {
     }
 
     @Test
-    public void testAddElementOverload(@Mock ItemStack itemStack, @Mock ClickAction clickAction) {
+    void testAddElementOverload(@Mock ItemStack itemStack, @Mock ClickAction clickAction) {
         // create temporary builder
         final MenuBuilder temp = new MenuBuilder(rows, title);
         // set item, title, lore one-shot
@@ -136,7 +136,7 @@ public class MenuBuilderTest {
     }
 
     @Test
-    public void testSetFiller(@Mock ItemStack itemStack, @Mock ClickAction clickAction) {
+    void testSetFiller(@Mock ItemStack itemStack, @Mock ClickAction clickAction) {
         // create temporary builder
         final MenuBuilder temp = new MenuBuilder(rows, title);
         final FillerBuilder fillerBuilder = temp.setFiller(itemStack);
@@ -155,7 +155,7 @@ public class MenuBuilderTest {
     }
 
     @Test
-    public void testSetFillerOverload(@Mock ItemStack itemStack, @Mock ClickAction clickAction) {
+    void testSetFillerOverload(@Mock ItemStack itemStack, @Mock ClickAction clickAction) {
         // create temporary builder
         final MenuBuilder temp = new MenuBuilder(rows, title);
         // set item, title, lore one-shot
@@ -173,7 +173,7 @@ public class MenuBuilderTest {
     }
 
     @Test
-    public void testCreate(@Mock JavaPlugin plugin) {
+    void testCreate(@Mock JavaPlugin plugin) {
         // test with array
         menuBuilderWithContents.create(plugin);
         verify(Bukkit.getPluginManager()).registerEvents(any(), eq(plugin));

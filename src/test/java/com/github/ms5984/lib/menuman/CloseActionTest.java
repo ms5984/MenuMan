@@ -8,10 +8,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 @ExtendWith(MockitoExtension.class)
-public class CloseActionTest {
+class CloseActionTest {
 
     @Test
-    public void testOnClose(@Mock MenuClose testClose) {
+    void testOnClose(@Mock MenuClose testClose) {
         CloseAction closeAction = close -> assertSame(testClose, close);
         closeAction.onClose(testClose);
     }

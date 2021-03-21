@@ -12,11 +12,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ClickActionTest {
+class ClickActionTest {
 
     @Mock
     MenuClick menuClick;
-    ClickAction clickAction = click -> assertSame(menuClick, click);
     final String testCommand = "gamemode creative";
     @Spy
     ClickAction.RunCommand runCommand = new ClickAction.RunCommand() {
@@ -38,29 +37,30 @@ public class ClickActionTest {
     };
 
     @Test
-    public void testOnClick() {
+    void testOnClick(@Mock ClickAction clickAction) {
         clickAction.onClick(menuClick);
+        verify(clickAction).onClick(menuClick);
     }
 
     @Test
-    public void testRunCommandOnClick() {
+    void testRunCommandOnClick() {
         doNothing().when(runCommand).onClick(any());
         runCommand.onClick(menuClick);
         verify(runCommand).onClick(menuClick);
     }
 
     @Test
-    public void testRunCommandCommandToRun() {
+    void testRunCommandCommandToRun() {
         assertEquals(testCommand, runCommand.commandToRun());
     }
 
     @Test
-    public void testRunCommandCloseOnClickDefault() {
+    void testRunCommandCloseOnClickDefault() {
         assertTrue(runCommand.closeOnClick());
     }
 
     @Test
-    public void testRunCommandCloseOnClickFalse() {
+    void testRunCommandCloseOnClickFalse() {
         assertFalse(runCommandFalse.closeOnClick());
     }
 }

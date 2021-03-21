@@ -9,7 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class FillerBuilderTest {
+class FillerBuilderTest {
     @Mock
     ItemStack fakeItem;
     @Mock
@@ -17,7 +17,7 @@ public class FillerBuilderTest {
     final int displacementItemSlot = 13;
 
     @Test
-    public void simpleConstructor() {
+    void simpleConstructor() {
         getSimpleFillerBuilder().set().items.forEach((index, element) -> {
             if (index == displacementItemSlot) {
                 assertNotSame(fakeItem, element.baseItem);
@@ -28,7 +28,7 @@ public class FillerBuilderTest {
     }
 
     @Test
-    public void setAction() {
+    void setAction() {
         final ClickAction clickAction = click -> {};
         getSimpleFillerBuilder().setAction(clickAction).set().actions.forEach((index, action) -> {
             if (index == displacementItemSlot) {
@@ -40,7 +40,7 @@ public class FillerBuilderTest {
     }
 
     @Test
-    public void setItem(@Mock ItemStack newItem) {
+    void setItem(@Mock ItemStack newItem) {
         getSimpleFillerBuilder().setItem(newItem).set().items.forEach((index, menuElement) -> {
             if (index == displacementItemSlot) {
                 assertNotSame(newItem, menuElement.baseItem);
@@ -52,7 +52,7 @@ public class FillerBuilderTest {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @Test
-    public void testSetLore() {
+    void testSetLore() {
         // test default
         final MenuBuilder plain = getSimpleFillerBuilder().set();
         plain.items.forEach((index, element) -> assertNull(element.lore));
@@ -110,7 +110,7 @@ public class FillerBuilderTest {
     }
 
     @Test
-    public void testAddLore() {
+    void testAddLore() {
         // test simple add
         assertDoesNotThrow(() -> getSimpleFillerBuilder().addLore("test"));
         // test set then add

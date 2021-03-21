@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.doReturn;
 
 @ExtendWith(MockitoExtension.class)
-public class MenuCloseTest {
+class MenuCloseTest {
 
     @Mock(name = "player")
     Player player;
@@ -28,20 +28,20 @@ public class MenuCloseTest {
     InventoryView view;
 
     @Test
-    public void testGetPlayer() {
+    void testGetPlayer() {
         doReturn(player).when(e).getPlayer();
         assertSame(e.getPlayer(), menuClose.getPlayer());
     }
 
     @Test
-    public void testGetUpperInventory() {
+    void testGetUpperInventory() {
         doReturn(inventory).when(e).getInventory();
         assertSame(e.getInventory(), menuClose.getUpperInventory());
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @Test
-    public void testGetInventoryView() {
+    void testGetInventoryView() {
         doReturn(view).when(e).getView();
         assertSame(e.getView(), menuClose.getInventoryView());
     }

@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class MenuTest {
+class MenuTest {
     @Spy
     final Menu menu;
     @Mock
@@ -43,7 +43,7 @@ public class MenuTest {
     }
 
     @Test
-    public void testGetInventory(@Mock Player player) {
+    void testGetInventory(@Mock Player player) {
         ArgumentCaptor<Inventory> captor = ArgumentCaptor.forClass(Inventory.class);
         // Open menu for fake player
         menu.open(player);
@@ -60,7 +60,7 @@ public class MenuTest {
     }
 
     @Test
-    public void testInventoryRowsSlotCount() {
+    void testInventoryRowsSlotCount() {
         // Assert every InventoryRow slotCount is divisible by 9
         for (Menu.InventoryRows rows : Menu.InventoryRows.values()) {
             assertEquals(0, rows.slotCount % 9);

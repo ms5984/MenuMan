@@ -150,7 +150,7 @@ public final class Menu {
     public Set<Player> getViewers() {
         if (inventory == null) return Collections.emptySet();
         return inventory.getViewers().parallelStream()
-                .filter(he -> he instanceof Player)
+                .filter(Player.class::isInstance)
                 .map(Player.class::cast)
                 .collect(Collectors.toSet());
     }

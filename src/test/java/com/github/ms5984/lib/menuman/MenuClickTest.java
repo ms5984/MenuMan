@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class MenuClickTest {
+class MenuClickTest {
 
     @Mock(name = "player")
     Player player;
@@ -36,24 +36,24 @@ public class MenuClickTest {
     ItemStack cursor;
 
     @Test
-    public void testGetPlayer() {
+    void testGetPlayer() {
         assertSame(player, menuClick.getPlayer());
     }
 
     @Test
-    public void testGetInventoryView() {
+    void testGetInventoryView() {
         when(e.getView()).thenReturn(view);
         assertSame(e.getView(), menuClick.getInventoryView());
     }
 
     @Test
-    public void testGetClickType() {
+    void testGetClickType() {
         when(e.getClick()).thenReturn(testClick);
         assertSame(e.getClick(), menuClick.getClickType());
     }
 
     @Test
-    public void testGetSlotClicked() {
+    void testGetSlotClicked() {
         // init stubs
         when(e.getSlot()).thenReturn(testSlot);
         doReturn(inventory).when(e).getClickedInventory();
@@ -66,7 +66,7 @@ public class MenuClickTest {
     }
 
     @Test
-    public void testGetItemOnMouseCursor() {
+    void testGetItemOnMouseCursor() {
         // init stubbing
         doReturn(cursor, cursor, null).when(e).getCursor();
         // test present
@@ -77,19 +77,19 @@ public class MenuClickTest {
     }
 
     @Test
-    public void testAllowClick() {
+    void testAllowClick() {
         menuClick.allowClick();
         verify(e).setCancelled(false);
     }
 
     @Test
-    public void testDisallowClick() {
+    void testDisallowClick() {
         menuClick.disallowClick();
         verify(e).setCancelled(true);
     }
 
     @Test
-    public void testInventorySlotGetItem() {
+    void testInventorySlotGetItem() {
         // init stubs
         when(e.getSlot()).thenReturn(testSlot);
         doReturn(inventory).when(e).getClickedInventory();
@@ -101,7 +101,7 @@ public class MenuClickTest {
     }
 
     @Test
-    public void testInventorySlotSetItem() {
+    void testInventorySlotSetItem() {
         // init stubs
         when(e.getSlot()).thenReturn(testSlot);
         doReturn(inventory).when(e).getClickedInventory();

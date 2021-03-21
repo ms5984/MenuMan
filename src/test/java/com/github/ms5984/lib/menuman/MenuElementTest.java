@@ -9,11 +9,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 @ExtendWith(MockitoExtension.class)
-public class MenuElementTest {
+class MenuElementTest {
     final ItemStack itemStack = new ItemStack(Material.DIRT);
 
     @Test
-    public void testMenuElementGenerateCompleteWithNullValues() {
+    void testMenuElementGenerateCompleteWithNullValues() {
         assertSame(itemStack, new MenuElement(itemStack).generateComplete());
     }
 }
