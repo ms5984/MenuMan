@@ -34,7 +34,7 @@ class MyMenuClass {
         <dependency>
             <groupId>com.github.ms5984.lib</groupId>
             <artifactId>menu-man</artifactId>
-            <version>1.0.3</version>
+            <version>1.2.0</version>
         </dependency>
     </dependencies>
 ```
@@ -58,7 +58,7 @@ class MyMenuClass {
         <dependency>
             <groupId>com.github.ms5984.lib</groupId>
             <artifactId>menu-man</artifactId>
-            <version>1.1.0-SNAPSHOT</version>
+            <version>1.2.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
@@ -77,7 +77,7 @@ class MyMenuClass {
         <dependency>
             <groupId>com.github.ms5984</groupId>
             <artifactId>MenuMan</artifactId>
-            <version>7b2da4f</version>
+            <version>b7ebd55</version>
         </dependency>
     </dependencies>
 </project>
