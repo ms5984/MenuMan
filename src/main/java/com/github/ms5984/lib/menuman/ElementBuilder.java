@@ -115,7 +115,7 @@ public final class ElementBuilder {
     public MenuBuilder assignToSlots(int... slots) throws IllegalArgumentException {
         for (int slot : slots) {
             if (slot >= menuBuilder.numberOfRows.slotCount) throw new IllegalArgumentException("That is not a valid slot!");
-            if (menuBuilder.numberOfRows.slotCount < 0) throw new IllegalArgumentException("That is not a valid slot!");
+            if (slot < 0) throw new IllegalArgumentException("That is not a valid slot!");
             menuBuilder.items.put(slot, menuElement);
             menuBuilder.actions.put(slot, menuAction);
         }
