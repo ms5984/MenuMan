@@ -6,7 +6,7 @@
 
     <groupId>com.github.ms5984.lib</groupId>
     <artifactId>menu-man</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>MenuMan</name>
@@ -120,30 +120,11 @@
                         </executions>
                     </plugin>
                     <plugin>
-                        <groupId>org.projectlombok</groupId>
-                        <artifactId>lombok-maven-plugin</artifactId>
-                        <version>1.18.16.0</version>
-                        <configuration>
-                            <encoding>UTF-8</encoding>
-                            <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-                            <addOutputDirectory>false</addOutputDirectory>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>generate-sources</phase>
-                                <goals>
-                                    <goal>delombok</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>3.2.0</version>
                         <configuration>
                             <doclint>missing,reference,syntax</doclint>
-                            <sourcepath>${project.build.directory}/generated-sources/delombok</sourcepath>
                         </configuration>
                         <executions>
                             <execution>
@@ -202,12 +183,6 @@
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>20.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.16</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
