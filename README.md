@@ -25,18 +25,59 @@ class MyMenuClass {
     }
 }
 ```
+### Relocation (READ THIS SECTION)
+It is important to include a valid `maven-shade-plugin` configuration to avoid
+colliding with other plugin jars that also use and provide this resource.
+Take moment to look over this example:
+```xml
+    <!-- In your pom.xml -->
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>3.1.0</version>
+          <!-- This is the important element -->
+          <configuration>
+            <relocations>
+              <relocation>
+                <pattern>com.github.ms5984.lib.menuman</pattern>
+                <!-- Replace this with your package! -->
+                <shadedPattern>com.github.ms5984.anotherplugin.menuman</shadedPattern>
+              </relocation>
+            </relocations>
+          </configuration>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
+              </goals>
+              <!-- Note that there are two areas labeled configuration! -->
+              <!-- Relocations must go up in the first one -->
+              <configuration>
+                <createDependencyReducedPom>false</createDependencyReducedPom>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </build>
+```
 
 ### Importing
 #### Releases: Just add the following into your `pom.xml`. No additional repository needed!
 ```xml
+<project>
     <!-- For Maven Central releases -->
     <dependencies>
         <dependency>
             <groupId>com.github.ms5984.lib</groupId>
             <artifactId>menu-man</artifactId>
-            <version>1.2.1</version>
+            <version><!--Maven-central version here--></version>
         </dependency>
     </dependencies>
+</project>
 ```
 #### Snapshots (requires sonatype repository)
 ```xml
@@ -58,7 +99,7 @@ class MyMenuClass {
         <dependency>
             <groupId>com.github.ms5984.lib</groupId>
             <artifactId>menu-man</artifactId>
-            <version>1.2.1-SNAPSHOT</version>
+            <version><!--nexus snapshot version here--></version>
         </dependency>
     </dependencies>
 </project>
@@ -77,7 +118,8 @@ class MyMenuClass {
         <dependency>
             <groupId>com.github.ms5984</groupId>
             <artifactId>MenuMan</artifactId>
-            <version>b7ebd55</version>
+            <!--commit hash; example below-->
+            <version>364bd89</version>
         </dependency>
     </dependencies>
 </project>
