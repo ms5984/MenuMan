@@ -2,6 +2,8 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.ms5984.lib/menu-man)](https://oss.sonatype.org/#nexus-search;gav~com.github.ms5984.lib~menu-man~~~)
 [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/com.github.ms5984.lib/menu-man?server=https%3A%2F%2Foss.sonatype.org)](https://oss.sonatype.org/#nexus-search;gav~com.github.ms5984.lib~menu-man~~~)
 
+###### This project has been archived. Please feel free to contact me.
+
 ### Implementation
 Create a new MenuBuilder object and follow the fluent interface where it takes you.
 
